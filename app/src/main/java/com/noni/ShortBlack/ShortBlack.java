@@ -13,8 +13,6 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.noni.ShortBlack.R;
-
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -86,21 +84,17 @@ public class ShortBlack extends AppCompatActivity implements View.OnClickListene
         Context c = this.getApplicationContext();
         String name;
 
-        try
-        {
+        try {
             Log.v(TAG, "Order object is " + orderObject.getString("coffeeType"));
             Log.v(TAG, "Order size is " + orderObject.getString("orderSize"));
             Log.v(TAG, "additive choices is " + orderObject.getString("additiveChoices"));
             Log.v(TAG, "milk Choices is " + orderObject.getString("milkChoices"));
         }
-        catch (JSONException e)
-        {
+        catch (JSONException e) {
             e.printStackTrace();
         }
 
-        switch (v.getId())
-
-        {
+        switch (v.getId()) {
             case R.id.submitButton: {
                 try {
 
@@ -112,12 +106,10 @@ public class ShortBlack extends AppCompatActivity implements View.OnClickListene
                             ) {
                         Log.v(TAG, "submit button clicked!");
 
-                        if (nameText.getText().toString().matches(""))
-                        {
+                        if (nameText.getText().toString().matches("")) {
                             name = generateName(c);
                         }
-                        else
-                        {
+                        else {
                             name = nameText.getText().toString();
                         }
 
@@ -130,25 +122,20 @@ public class ShortBlack extends AppCompatActivity implements View.OnClickListene
 
                     }
 
-                    else if (orderObject.getString("coffeeType") == null)
-                    {
+                    else if (orderObject.getString("coffeeType") == null) {
                         Toast.makeText(getApplicationContext(), "What kinda coffee ya like?", Toast.LENGTH_SHORT).show();
 
                     }
-                    else if (orderObject.getString("orderSize") == null)
-                    {
+                    else if (orderObject.getString("orderSize") == null) {
                         Toast.makeText(getApplicationContext(), "What's ya order size?", Toast.LENGTH_SHORT).show();
                     }
-                    else if (orderObject.getString("genderChoices") == null)
-                    {
+                    else if (orderObject.getString("genderChoices") == null) {
                         Toast.makeText(getApplicationContext(), "What's your name?", Toast.LENGTH_SHORT).show();
                     }
-                    else if (orderObject.getString("additiveChoices") == null)
-                    {
+                    else if (orderObject.getString("additiveChoices") == null) {
                         Toast.makeText(getApplicationContext(), "Would you like milk or do you prefer black coffee?", Toast.LENGTH_SHORT).show();
                     }
-                    else if (orderObject.getString("milkChoices") == null)
-                    {
+                    else if (orderObject.getString("milkChoices") == null) {
                         Toast.makeText(getApplicationContext(), "What kinda milk eh?", Toast.LENGTH_SHORT).show();
                     }
 
@@ -225,8 +212,7 @@ public class ShortBlack extends AppCompatActivity implements View.OnClickListene
 
     }
 
-    public String generateName(Context c)
-    {
+    public String generateName(Context c) {
         String namesListB = "Jackson Aiden Liam Lucas Noah Mason Ethan Caden Jacob Logan Jayden Elijah Jack Luke Michael Benjamin Alexander James Jayce Caleb Connor William Carter Ryan Oliver Matthew Daniel Gabriel Henry Owen Grayson Dylan Landon Isaac Nicholas Wyatt Nathan Andrew Cameron Dominic Joshua Eli Sebastian Hunter Brayden David Samuel Evan Gavin Christian Max Anthony Joseph Julian John Colton Levi Muhammad Isaiah Aaron Tyler Charlie Adam Parker Austin Thomas Zachary Nolan Alex Ian Jonathan Christopher Cooper Hudson Miles Adrian Leo Blake Lincoln Jordan Tristan Jason Josiah Xavier Camden Chase Declan Carson Colin Brody Asher Jeremiah Micah Easton Xander Ryder Nathaniel Elliot Sean Cole";
         String namesListG = "Sophia Emma Olivia Ava Isabella Mia Zoe Lily Emily Madelyn Madison Chloe Charlotte Aubrey Avery Abigail Kaylee Layla Harper Ella Amelia Arianna Riley Aria Hailey Hannah Aaliyah Evelyn Addison Mackenzie Adalyn Ellie Brooklyn Nora Scarlett Grace Anna Isabelle Natalie Kaitlyn Lillian Sarah Audrey Elizabeth Leah Annabelle Kylie Mila Claire Victoria Maya Lila Elena Lucy Savannah Gabriella Callie Alaina Sophie Makayla Kennedy Sadie Skyler Allison Caroline Charlie Penelope Alyssa Peyton Samantha Liliana Bailey Maria Reagan Violet Eliana Adeline Eva Stella Keira Katherine Vivian Alice Alexandra Camilla Kayla Alexis Sydney Kaelyn Jasmine Julia Cora Lauren Piper Gianna Paisley Bella London Clara Cadence";
         ArrayList namesListBoys = new ArrayList<String>();
@@ -258,8 +244,7 @@ public class ShortBlack extends AppCompatActivity implements View.OnClickListene
 
         return name;
     }
-    public String randomiseName (ArrayList<String> namesList)
-    {
+    public String randomiseName (ArrayList<String> namesList) {
         String name = "";
 
 
