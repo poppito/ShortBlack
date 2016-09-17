@@ -1,4 +1,4 @@
-package com.noni.comnonishortblack;
+package com.noni.ShortBlack;
 
 import org.junit.Test;
 

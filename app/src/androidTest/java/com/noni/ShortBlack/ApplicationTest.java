@@ -1,4 +1,4 @@
-package com.noni.comnonishortblack;
+package com.noni.ShortBlack;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;

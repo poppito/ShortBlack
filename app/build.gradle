@@ -5,7 +5,7 @@ android {
     buildToolsVersion "23.0.2"
 
     defaultConfig {
-        applicationId "com.noni.comnonishortblack"
+        applicationId "com.noni.ShortBlack"
         minSdkVersion 15
         targetSdkVersion 23
         versionCode 1

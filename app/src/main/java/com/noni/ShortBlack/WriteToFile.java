@@ -1,4 +1,4 @@
-package com.noni.shortblack;
+package com.noni.ShortBlack;
 import android.content.Context;
 import java.io.File;
 import java.io.FileOutputStream;
