@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center_vertical"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.noni.comnonishortblack.ShortBlack">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TableRow
+            android:id="@+id/tr0"
+            android:layout_width="@dimen/rowWidth"
+            android:layout_height="@dimen/rowHeight"
+            android:paddingBottom="@dimen/rowPaddingBottom">
+            <EditText
+                android:hint="@string/nameString"
+                android:id="@+id/Name"
+                android:layout_width="280dp"
+                android:layout_height="70dp">
+            </EditText>
+        </TableRow>
+        <TableRow
+            android:id="@+id/tr1"
+            android:layout_width="@dimen/rowWidth"
+            android:layout_height="@dimen/rowHeight"
+            android:paddingBottom="@dimen/rowPaddingBottom"
+            android:layout_below="@id/tr0"
+            android:text="@string/tr1">
+
+            <TextView
+                android:textSize="@dimen/largeTextSize"
+                android:text="@string/orString"
+                android:id="@+id/orString"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                >
+                </TextView>
+        </TableRow>
+        <TableRow
+            android:id="@+id/tr3"
+            android:layout_width="@dimen/rowWidth"
+            android:layout_height="@dimen/rowHeight"
+            android:paddingBottom="@dimen/rowPaddingBottom"
+            android:layout_below="@id/tr1">
+
+            <Spinner
+                android:id="@+id/orderSizesSpinner"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+            </Spinner>
+
+        </TableRow>
+
+    <TableRow
+        android:id="@+id/tr4"
+        android:layout_width="@dimen/rowWidth"
+        android:layout_height="@dimen/rowHeight"
+        android:paddingBottom="@dimen/rowPaddingBottom"
+        android:layout_below="@id/tr3">
+
+    <Spinner
+        android:id="@+id/milkChoicesSpinner"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    </Spinner>
+    </TableRow>
+
+
+    <TableRow
+        android:id="@+id/tr5"
+        android:layout_width="@dimen/rowWidth"
+        android:layout_height="@dimen/rowHeight"
+        android:paddingBottom="@dimen/rowPaddingBottom"
+        android:layout_below="@id/tr4">
+
+    <Spinner
+        android:id="@+id/additiveChoicesSpinner"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    </Spinner>
+    </TableRow>
+
+    <TableRow
+        android:id="@+id/tr6"
+        android:layout_width="@dimen/rowWidth"
+        android:layout_height="@dimen/rowHeight"
+        android:paddingBottom="@dimen/rowPaddingBottom"
+        android:layout_below="@id/tr5">
+
+        <Spinner
+            android:id="@+id/coffeeTypeSpinner"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        </Spinner>
+    </TableRow>
+
+    <TableRow
+        android:id="@+id/tr7"
+        android:layout_width="@dimen/rowWidth"
+        android:layout_height="@dimen/rowHeight"
+        android:paddingBottom="10dp"
+        android:layout_below="@id/tr6">
+
+        <Button
+            android:id="@+id/submitButton"
+            android:layout_width="@dimen/buttonWidth"
+            android:layout_height="@dimen/buttonHeight"
+            android:text="@string/submitButton">
+        </Button>
+    </TableRow>
+</RelativeLayout>
+    </ScrollView>

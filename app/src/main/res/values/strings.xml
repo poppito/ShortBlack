@@ -1,0 +1,57 @@
+<resources>
+    <string name="app_name">ShortBlack</string>
+    <string name="introString">Yeah! Mr. White! Science!</string>
+    <string name="tr0">Yeah! Mr. White! Science!</string>
+    <string name="tr1">Yeah! Mr. White! Science!</string>
+    <string name="tr2">Yeah! Mr. White! Science!</string>
+    <string name="nameString">Enter name or leave blank to randomise!</string>
+    <string name="orderString">What\'s your order?</string>
+    <string name="Gender">(Optional) What\'s your Gender?</string>
+    <string name="submitButton">Submit</string>
+    <string name="orString">Select order below</string>
+
+    <string-array name="genderChoicesArray">
+        <item>Male</item>
+        <item>Female</item>
+        <item>Randomise</item>
+    </string-array>
+
+    <string-array name="milkChoicesArray">
+        <item>Milk type?</item>
+        <item>None (Black)</item>
+        <item>Full cream</item>
+        <item>Skinny</item>
+        <item>Soy</item>
+        <item>Almond</item>
+    </string-array>
+
+    <string-array name="orderSizesArray">
+        <item>Order size?</item>
+        <item>Short</item>
+        <item>Small</item>
+        <item>Medium</item>
+        <item>Large</item>
+        <item>Tall</item>
+        <item>Shot</item>
+    </string-array>
+
+    <string-array name="additiveArray">
+        <item>Sweetner?</item>
+        <item>none</item>
+        <item>one sugar</item>
+        <item>two sugars</item>
+        <item>three sugars</item>
+        <item>four sugars</item>
+        <item>honey</item>
+    </string-array>
+
+    <string-array name="cofeeTypeArray">
+        <item>Coffee type?</item>
+        <item>Latte</item>
+        <item>Capuccino</item>
+        <item>Mocha</item>
+        <item>Mochaccino</item>
+        <item>Flat White</item>
+    </string-array>
+    <string name="title_activity_find_it">Map</string>
+</resources>
