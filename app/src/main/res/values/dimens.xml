@@ -2,12 +2,8 @@
     <!-- Default screen margins, per the Android Design guidelines. -->
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
-    <dimen name="rowHeight">80dp</dimen>
-    <dimen name="rowWidth">380dp</dimen>
-    <dimen name="rowPaddingBottom">10dp</dimen>
     <dimen name="textHeight">50dp</dimen>
-    <dimen name="textWidth">280dp</dimen>
     <dimen name="largeTextSize">20dp</dimen>
-    <dimen name="buttonWidth">180dp</dimen>
-    <dimen name="buttonHeight">50dp</dimen>
+    <dimen name="orderSubmitButtonWidth">180dp</dimen>
+    <dimen name="orderSubmitButtonHeight">50dp</dimen>
 </resources>
