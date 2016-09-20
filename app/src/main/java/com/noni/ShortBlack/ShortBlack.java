@@ -15,6 +15,8 @@ import android.widget.Toast;
 
 import java.util.HashMap;
 
+import static com.noni.ShortBlack.R.id.milkChoicesSpinner;
+
 public class ShortBlack extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemSelectedListener, TextWatcher {
 
     private Button submitButton;
@@ -34,7 +36,7 @@ public class ShortBlack extends AppCompatActivity implements View.OnClickListene
         Spinner mAdditiveChoicesSpinner = (Spinner) findViewById(R.id.additiveChoicesSpinner);
         Spinner mOrderSizesSpinner = (Spinner) findViewById(R.id.orderSizesSpinner);
         Spinner mCoffeeTypeSpinner = (Spinner) findViewById(R.id.coffeeTypeSpinner);
-        Spinner mMilkChoicesSpinner = (Spinner) findViewById(R.id.milkChoicesSpinner);
+        Spinner mMilkChoicesSpinner = (Spinner) findViewById(milkChoicesSpinner);
 
 
         ArrayAdapter<CharSequence> mAdditiveAdapter = ArrayAdapter.createFromResource(this, R.array.additiveArray, android.R.layout.simple_spinner_item);
@@ -63,7 +65,6 @@ public class ShortBlack extends AppCompatActivity implements View.OnClickListene
         //Initialise submit button
         submitButton.setOnClickListener(this);
         submitButton.setBackgroundColor(getResources().getColor(R.color.button_inactive));
-        submitButton.setEnabled(false);
         nameText.addTextChangedListener(this);
         GenerateName g = new GenerateName();
         name = g.GenerateName();
@@ -72,11 +73,15 @@ public class ShortBlack extends AppCompatActivity implements View.OnClickListene
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
         switch (parent.getId()) {
-            case R.id.milkChoicesSpinner: {
+            case milkChoicesSpinner: {
                 if (position != 0) {
                     valuesMap.put("milkChoice", parent.getItemAtPosition(position).toString());
                     Log.e(TAG, parent.getItemAtPosition(position).toString());
+                }
+                else {
+                    if (valuesMap.containsKey("milkChoice")) { valuesMap.remove("milkChoice"); }
                 }
                 break;
             }
@@ -87,6 +92,10 @@ public class ShortBlack extends AppCompatActivity implements View.OnClickListene
                     valuesMap.put("additiveChoice", parent.getItemAtPosition(position).toString());
                     Log.e(TAG, parent.getItemAtPosition(position).toString());
                 }
+                else {
+                    if (valuesMap.containsKey("additiveChoice")) { valuesMap.remove("additiveChoice"); }
+                }
+
                 break;
             }
 
@@ -95,6 +104,9 @@ public class ShortBlack extends AppCompatActivity implements View.OnClickListene
                     //pop this into the json object;
                     valuesMap.put("coffeeType", parent.getItemAtPosition(position).toString());
                     Log.e(TAG, parent.getItemAtPosition(position).toString());
+                }
+                else {
+                    if (valuesMap.containsKey("coffeeType")) { valuesMap.remove("coffeeType"); }
                 }
                 break;
             }
@@ -105,14 +117,13 @@ public class ShortBlack extends AppCompatActivity implements View.OnClickListene
                     valuesMap.put("orderSize", parent.getItemAtPosition(position).toString());
                     Log.e(TAG, parent.getItemAtPosition(position).toString());
                 }
+                else {
+                    if (valuesMap.containsKey("orderSize")) { valuesMap.remove("orderSize"); }
+                }
                 break;
             }
         }
-        if (allValuesValidated()) {
-            submitButton.setBackgroundColor(getResources().getColor(R.color.button_active));
-            submitButton.setEnabled(true);
-            Log.e(TAG, "all values validated");
-        }
+        enableButton();
     }
 
     public boolean allValuesValidated()
@@ -162,12 +173,25 @@ public class ShortBlack extends AppCompatActivity implements View.OnClickListene
         }
     }
 
+    public void enableButton()
+    {
+        if(allValuesValidated()) {
+
+            submitButton.setBackgroundColor(getResources().getColor(R.color.button_active));
+        }
+        else {
+            submitButton.setBackgroundColor(getResources().getColor(R.color.button_inactive));
+        }
+    }
+
     @Override
     public void onClick(View v) {
 
         switch (v.getId()) {
             case R.id.submitButton: {
-                Log.e(TAG, "submit button clicked!");
+                if (allValuesValidated()) {
+                    Log.e(TAG, "name is " + name.toString());
+                }
             }
                 break;
             }
