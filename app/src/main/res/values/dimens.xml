@@ -6,4 +6,5 @@
     <dimen name="largeTextSize">20dp</dimen>
     <dimen name="orderSubmitButtonWidth">180dp</dimen>
     <dimen name="orderSubmitButtonHeight">50dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
 </resources>

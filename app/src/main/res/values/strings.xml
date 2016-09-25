@@ -54,4 +54,5 @@
         <item>Flat White</item>
     </string-array>
     <string name="title_activity_find_it">Map</string>
+    <string name="title_activity_order_details">Order_details</string>
 </resources>

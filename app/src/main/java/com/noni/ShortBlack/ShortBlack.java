@@ -1,5 +1,6 @@
 package com.noni.ShortBlack;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
@@ -64,6 +65,7 @@ public class ShortBlack extends AppCompatActivity implements View.OnClickListene
 
         //Initialise submit button
         submitButton.setOnClickListener(this);
+       // submitButton.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.button_inactive));
         submitButton.setBackgroundColor(getResources().getColor(R.color.button_inactive));
         nameText.addTextChangedListener(this);
         GenerateName g = new GenerateName();
@@ -177,9 +179,11 @@ public class ShortBlack extends AppCompatActivity implements View.OnClickListene
     {
         if(allValuesValidated()) {
 
+            //submitButton.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.button_active));
             submitButton.setBackgroundColor(getResources().getColor(R.color.button_active));
         }
         else {
+            //submitButton.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.button_inactive));
             submitButton.setBackgroundColor(getResources().getColor(R.color.button_inactive));
         }
     }
@@ -191,6 +195,8 @@ public class ShortBlack extends AppCompatActivity implements View.OnClickListene
             case R.id.submitButton: {
                 if (allValuesValidated()) {
                     Log.e(TAG, "name is " + name.toString());
+                    Intent fireUpOrderDetails = new Intent(this, OrderDetails.class);
+                    startActivity(fireUpOrderDetails);
                 }
             }
                 break;
