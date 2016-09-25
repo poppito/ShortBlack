@@ -80,7 +80,7 @@ public class ShortBlack extends AppCompatActivity implements View.OnClickListene
             case milkChoicesSpinner: {
                 if (position != 0) {
                     valuesMap.put("milkChoice", parent.getItemAtPosition(position).toString());
-                    Log.e(TAG, parent.getItemAtPosition(position).toString());
+                    Log.v(TAG, parent.getItemAtPosition(position).toString());
                 }
                 else {
                     if (valuesMap.containsKey("milkChoice")) { valuesMap.remove("milkChoice"); }
@@ -92,7 +92,7 @@ public class ShortBlack extends AppCompatActivity implements View.OnClickListene
                 if (position != 0) {
                     //pop this into the json object;
                     valuesMap.put("additiveChoice", parent.getItemAtPosition(position).toString());
-                    Log.e(TAG, parent.getItemAtPosition(position).toString());
+                    Log.v(TAG, parent.getItemAtPosition(position).toString());
                 }
                 else {
                     if (valuesMap.containsKey("additiveChoice")) { valuesMap.remove("additiveChoice"); }
@@ -105,7 +105,7 @@ public class ShortBlack extends AppCompatActivity implements View.OnClickListene
                 if (position != 0) {
                     //pop this into the json object;
                     valuesMap.put("coffeeType", parent.getItemAtPosition(position).toString());
-                    Log.e(TAG, parent.getItemAtPosition(position).toString());
+                    Log.v(TAG, parent.getItemAtPosition(position).toString());
                 }
                 else {
                     if (valuesMap.containsKey("coffeeType")) { valuesMap.remove("coffeeType"); }
@@ -117,7 +117,7 @@ public class ShortBlack extends AppCompatActivity implements View.OnClickListene
                 if (position != 0) {
                     //pop this into the json object;
                     valuesMap.put("orderSize", parent.getItemAtPosition(position).toString());
-                    Log.e(TAG, parent.getItemAtPosition(position).toString());
+                    Log.v(TAG, parent.getItemAtPosition(position).toString());
                 }
                 else {
                     if (valuesMap.containsKey("orderSize")) { valuesMap.remove("orderSize"); }
@@ -145,7 +145,7 @@ public class ShortBlack extends AppCompatActivity implements View.OnClickListene
         }
         else if (! valuesMap.containsKey("orderSize")) {
             Toast.makeText(getApplicationContext(), "Please select an order size!", Toast.LENGTH_SHORT).show();
-            Log.e(TAG, "no order size selected");
+            Log.v(TAG, "no order size selected");
         }
         return false;
     }
@@ -153,7 +153,7 @@ public class ShortBlack extends AppCompatActivity implements View.OnClickListene
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
 
-        Log.e(TAG, "nothing selected");
+        Log.v(TAG, "nothing selected");
 
     }
 
@@ -194,8 +194,10 @@ public class ShortBlack extends AppCompatActivity implements View.OnClickListene
         switch (v.getId()) {
             case R.id.submitButton: {
                 if (allValuesValidated()) {
-                    Log.e(TAG, "name is " + name.toString());
+                    Log.v(TAG, "name is " + name);
                     Intent fireUpOrderDetails = new Intent(this, OrderDetails.class);
+                    fireUpOrderDetails.putExtra("orderDetails", valuesMap);
+                    fireUpOrderDetails.putExtra("nameGenerated", name);
                     startActivity(fireUpOrderDetails);
                 }
             }

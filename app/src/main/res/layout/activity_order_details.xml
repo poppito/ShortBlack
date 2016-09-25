@@ -16,5 +16,21 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:orientation="vertical">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:id="@+id/nameGenerated"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:id="@+id/coffeeOrder"/>
+        <Button
+            android:layout_gravity="center_horizontal"
+            android:background="@color/textColor"
+            android:textColor="@color/app_background"
+            android:id="@+id/editButton"
+            android:layout_width="@dimen/orderSubmitButtonWidth"
+            android:layout_height="@dimen/orderSubmitButtonHeight"
+            android:text="Edit Order"/>
     </LinearLayout>
 </ScrollView>
