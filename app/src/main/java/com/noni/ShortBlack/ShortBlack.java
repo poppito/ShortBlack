@@ -91,7 +91,6 @@ public class ShortBlack extends AppCompatActivity implements View.OnClickListene
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
         switch (parent.getId()) {
             case milkChoicesSpinner: {
                 if (position != 0) {
@@ -216,5 +215,4 @@ public class ShortBlack extends AppCompatActivity implements View.OnClickListene
             break;
         }
     }
-
 }

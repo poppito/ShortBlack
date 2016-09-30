@@ -9,6 +9,7 @@
     <string name="Gender">(Optional) What\'s your Gender?</string>
     <string name="orderSubmitButton">Submit</string>
     <string name="orString">Select order below</string>
+    <string name="titleString">Welcome to ShortBlack! Your favourite coffee order app!</string>
 
     <string-array name="genderChoicesArray">
         <item>Male</item>
