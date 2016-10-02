@@ -1,10 +1,13 @@
 package com.noni.ShortBlack;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -21,8 +24,22 @@ public class OrderDetails extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
+        if (Build.VERSION.SDK_INT < 16) {
+            getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        } else {
+            View decorView = getWindow().getDecorView();
+            int uiOptions = View.SYSTEM_UI_FLAG_FULLSCREEN;
+            decorView.setSystemUiVisibility(uiOptions);
+            ActionBar ab = this.getSupportActionBar();
+            if (ab != null) {
+                ab.hide();
+            }
+        }
+
         setContentView(R.layout.activity_order_details);
-        nameGenerated = (TextView) findViewById(R.id.nameGenerated);
+      //  nameGenerated = (TextView) findViewById(R.id.nameGenerated);
         coffeeOrder = (TextView) findViewById(R.id.coffeeOrder);
         editButton = (Button) findViewById(R.id.editButton);
 
@@ -31,8 +48,7 @@ public class OrderDetails extends AppCompatActivity implements View.OnClickListe
         Intent orderDetails = getIntent();
         HashMap<String, String> valuesMap = new HashMap<>();
         valuesMap = (HashMap<String,String>) orderDetails.getSerializableExtra("orderDetails");
-        nameGenerated.setText("G'day the name for your coffee order is " + orderDetails.getStringExtra("nameGenerated"));
-        coffeeOrder.setText("Your coffee order is of a " + valuesMap.get((String) "orderSize") + " " + valuesMap.get((String) "coffeeType") + " with " + valuesMap.get((String) "milkChoice") + " milk and " + valuesMap.get((String) "additiveChoice") + ".");
+        coffeeOrder.setText("Coffee order for " + orderDetails.getStringExtra("nameGenerated") + " of a " + valuesMap.get((String) "orderSize") + " " + valuesMap.get((String) "coffeeType") + " with " + valuesMap.get((String) "milkChoice") + " and " + valuesMap.get((String) "additiveChoice") + ".");
 
     }
 

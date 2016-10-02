@@ -17,19 +17,24 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:orientation="vertical">
+        <ImageView
+            android:layout_width="match_parent"
+            android:scaleType="fitXY"
+            android:layout_height="300dp"
+            android:src="@drawable/shortblack_order"/>
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:id="@+id/nameGenerated"/>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="100dp"
+            android:padding="@dimen/order_details_text_padding"
+            android:layout_height="200dp"
+            android:maxLines="3"
+            android:textAllCaps="true"
             android:id="@+id/coffeeOrder"/>
         <Button
             android:layout_gravity="center_horizontal"
             android:background="@color/textColor"
             android:textColor="@color/app_background"
             android:id="@+id/editButton"
+            android:textAllCaps="false"
             android:layout_width="@dimen/orderSubmitButtonWidth"
             android:layout_height="@dimen/orderSubmitButtonHeight"
             android:text="Edit Order"/>

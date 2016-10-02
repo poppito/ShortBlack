@@ -7,9 +7,10 @@
     <string name="nameString">Enter name or leave blank to randomise!</string>
     <string name="orderString">What\'s your order?</string>
     <string name="Gender">(Optional) What\'s your Gender?</string>
-    <string name="orderSubmitButton">Submit</string>
+    <string name="orderSubmitButton">Submit order?</string>
     <string name="orString">Select order below</string>
-    <string name="titleString">Welcome to ShortBlack! Your favourite coffee order app!</string>
+    <string name="titleString">Welcome to ShortBlack! Please select order below.</string>
+    <string name="shortblack_add_another_order_string">Add another order?</string>
 
     <string-array name="genderChoicesArray">
         <item>Male</item>
@@ -19,11 +20,11 @@
 
     <string-array name="milkChoicesArray">
         <item>Milk type?</item>
-        <item>None (Black)</item>
-        <item>Full cream</item>
-        <item>Skinny</item>
-        <item>Soy</item>
-        <item>Almond</item>
+        <item>No milk</item>
+        <item>Full cream milk</item>
+        <item>Skinny milk</item>
+        <item>Soy milk</item>
+        <item>Almond milk</item>
     </string-array>
 
     <string-array name="orderSizesArray">

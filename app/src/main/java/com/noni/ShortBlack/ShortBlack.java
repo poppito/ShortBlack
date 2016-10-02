@@ -15,7 +15,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.Toast;
+import android.widget.TextView;
 
 import java.util.HashMap;
 
@@ -28,6 +28,7 @@ public class ShortBlack extends AppCompatActivity implements View.OnClickListene
     private String TAG = ShortBlack.class.getSimpleName();
     private HashMap<String, String> valuesMap = new HashMap<>();
     private String name;
+    private TextView statusText, titleText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +49,9 @@ public class ShortBlack extends AppCompatActivity implements View.OnClickListene
         setContentView(R.layout.activity_short_black);
         submitButton = (Button) findViewById(R.id.submitButton);
         nameText = (EditText) findViewById(R.id.Name);
+        titleText = (TextView) findViewById(R.id.title_message);
+        statusText = (TextView) findViewById(R.id.status_message);
+
 
 
         Spinner mAdditiveChoicesSpinner = (Spinner) findViewById(R.id.additiveChoicesSpinner);
@@ -201,14 +205,21 @@ public class ShortBlack extends AppCompatActivity implements View.OnClickListene
                     fireUpOrderDetails.putExtra("nameGenerated", name);
                     startActivity(fireUpOrderDetails);
                 } else if (!valuesMap.containsKey("milkChoice")) {
-                    Toast.makeText(getApplicationContext(), "Please select a choice for milk type!", Toast.LENGTH_SHORT).show();
-
+                    //Toast.makeText(getApplicationContext(), "What kinda milk? :)", Toast.LENGTH_SHORT).show();
+                    statusText.setText("What kinda milk? :)");
+                    statusText.setTextColor(getResources().getColor(R.color.warning_text_colour));
                 } else if (!valuesMap.containsKey("additiveChoice")) {
-                    Toast.makeText(getApplicationContext(), "Please select an additive choice your order!", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(getApplicationContext(), "Please select an additive choice your order!", Toast.LENGTH_SHORT).show();
+                    statusText.setText("Any sweetners? :)");
+                    statusText.setTextColor(getResources().getColor(R.color.warning_text_colour));
                 } else if (!valuesMap.containsKey("coffeeType")) {
-                    Toast.makeText(getApplicationContext(), "Please select type of coffee for your order!", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(getApplicationContext(), "Please select type of coffee for your order!", Toast.LENGTH_SHORT).show();
+                    statusText.setText("Is it a latte? or a flat white? :)");
+                    statusText.setTextColor(getResources().getColor(R.color.warning_text_colour));
                 } else if (!valuesMap.containsKey("orderSize")) {
-                    Toast.makeText(getApplicationContext(), "Please select an order size!", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(getApplicationContext(), "Please select an order size!", Toast.LENGTH_SHORT).show();
+                    statusText.setText("How about an order size? :)");
+                    statusText.setTextColor(getResources().getColor(R.color.warning_text_colour));
                     Log.v(TAG, "no order size selected");
                 }
             }
