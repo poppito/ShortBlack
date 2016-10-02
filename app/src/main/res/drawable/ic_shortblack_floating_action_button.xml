@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape android:shape="oval">
+            <stroke android:color="@color/borders"></stroke>
+            <size android:height="@dimen/shortblack_add_another_height" android:width="@dimen/shortblack_add_another_width">
+            </size>
+            <solid android:color="@color/app_background"></solid>
+            <corners android:radius="@dimen/shortblack_border_radius"></corners>
+        </shape>
+    </item>
+
+</selector>

@@ -4,7 +4,10 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
     <color name="textColor">#000000</color>
+    <color name="borders">#000000</color>
     <color name="app_background">#ffffff</color>
     <color name="button_active">#000000</color>
     <color name="button_inactive">#95746C</color>
+    <color name="warning_text_colour">#ff0000</color>
+    <color name="warning_text_contrast">#000000</color>
 </resources>

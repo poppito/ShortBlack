@@ -4,7 +4,12 @@
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="textHeight">50dp</dimen>
     <dimen name="largeTextSize">20dp</dimen>
-    <dimen name="orderSubmitButtonWidth">180dp</dimen>
+    <dimen name="mediumTextSize">15dp</dimen>
+    <dimen name="orderSubmitButtonWidth">150dp</dimen>
     <dimen name="orderSubmitButtonHeight">50dp</dimen>
-    <dimen name="fab_margin">16dp</dimen>
+    <dimen name="shortblack_add_another_height">60dp</dimen>
+    <dimen name="shortblack_add_another_width">60dp</dimen>
+    <dimen name="shortblack_border_radius">20dp</dimen>
+    <dimen name="linear_layout_spacers">10dp</dimen>
+    <dimen name="order_details_text_padding">20dp</dimen>
 </resources>
