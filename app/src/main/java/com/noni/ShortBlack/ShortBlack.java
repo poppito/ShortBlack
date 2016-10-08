@@ -1,5 +1,6 @@
 package com.noni.ShortBlack;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -10,25 +11,32 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ScrollView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
 import java.util.HashMap;
 
+import static android.view.View.GONE;
 import static com.noni.ShortBlack.R.id.milkChoicesSpinner;
 
-public class ShortBlack extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemSelectedListener, TextWatcher {
+public class ShortBlack extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemSelectedListener, TextWatcher, View.OnFocusChangeListener{
 
-    private Button submitButton;
+    private Button submitButton, saveButton;
     private EditText nameText;
     private String TAG = ShortBlack.class.getSimpleName();
     private HashMap<String, String> valuesMap = new HashMap<>();
     private String name;
     private TextView statusText, titleText;
+    private ScrollView shortBlackMainScrollView;
+    private Button closeKeyboard;
+    private InputMethodManager imm;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,12 +55,12 @@ public class ShortBlack extends AppCompatActivity implements View.OnClickListene
         }
 
         setContentView(R.layout.activity_short_black);
+        shortBlackMainScrollView = (ScrollView) findViewById(R.id.shortblack_scrollview_main);
         submitButton = (Button) findViewById(R.id.submitButton);
-        nameText = (EditText) findViewById(R.id.Name);
+        saveButton = (Button) findViewById(R.id.saveForLater);
+        nameText = (EditText) findViewById(R.id.name);
         titleText = (TextView) findViewById(R.id.title_message);
         statusText = (TextView) findViewById(R.id.status_message);
-
-
 
         Spinner mAdditiveChoicesSpinner = (Spinner) findViewById(R.id.additiveChoicesSpinner);
         Spinner mOrderSizesSpinner = (Spinner) findViewById(R.id.orderSizesSpinner);
@@ -82,12 +90,20 @@ public class ShortBlack extends AppCompatActivity implements View.OnClickListene
         mCoffeeTypeSpinner.setOnItemSelectedListener(this);
         mMilkChoicesSpinner.setOnItemSelectedListener(this);
         mOrderSizesSpinner.setOnItemSelectedListener(this);
+        imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
 
         //Initialise submit button
         submitButton.setOnClickListener(this);
+        saveButton.setOnClickListener(this);
+        shortBlackMainScrollView.setOnClickListener(this);
         // submitButton.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.button_inactive));
         submitButton.setBackgroundColor(getResources().getColor(R.color.button_inactive));
         nameText.addTextChangedListener(this);
+        nameText.setOnClickListener(this);
+        nameText.setOnFocusChangeListener(this);
+        closeKeyboard = (Button) findViewById(R.id.closeKeyboard);
+        closeKeyboard.setVisibility(GONE);
+        closeKeyboard.setOnClickListener(this);
         GenerateName g = new GenerateName();
         name = g.GenerateName();
     }
@@ -148,7 +164,7 @@ public class ShortBlack extends AppCompatActivity implements View.OnClickListene
                 break;
             }
         }
-        enableButton();
+        enableButtons();
     }
 
     public boolean allValuesValidated() {
@@ -182,20 +198,21 @@ public class ShortBlack extends AppCompatActivity implements View.OnClickListene
         }
     }
 
-    public void enableButton() {
+    public void enableButtons() {
         if (allValuesValidated()) {
 
             //submitButton.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.button_active));
             submitButton.setBackgroundColor(getResources().getColor(R.color.button_active));
+            saveButton.setBackgroundColor(getResources().getColor(R.color.button_active));
         } else {
             //submitButton.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.button_inactive));
             submitButton.setBackgroundColor(getResources().getColor(R.color.button_inactive));
+
         }
     }
 
     @Override
     public void onClick(View v) {
-
         switch (v.getId()) {
             case R.id.submitButton: {
                 if (allValuesValidated()) {
@@ -222,8 +239,26 @@ public class ShortBlack extends AppCompatActivity implements View.OnClickListene
                     statusText.setTextColor(getResources().getColor(R.color.warning_text_colour));
                     Log.v(TAG, "no order size selected");
                 }
+                break;
             }
-            break;
+            case R.id.closeKeyboard: {
+                imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+                closeKeyboard.setVisibility(GONE);
+                break;
+            }
+            case R.id.name:  {
+                imm.showSoftInput(nameText, InputMethodManager.SHOW_IMPLICIT);
+                closeKeyboard.setVisibility(View.VISIBLE);
+                break;
+            }
+        }
+    }
+
+    @Override
+    public void onFocusChange(View v, boolean hasFocus) {
+        if (nameText.hasFocus()) {
+            imm.showSoftInput(nameText, InputMethodManager.SHOW_IMPLICIT);
+            closeKeyboard.setVisibility(View.VISIBLE);
         }
     }
 }

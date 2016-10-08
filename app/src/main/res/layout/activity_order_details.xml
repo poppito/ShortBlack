@@ -35,7 +35,7 @@
             android:textColor="@color/app_background"
             android:id="@+id/editButton"
             android:textAllCaps="false"
-            android:layout_width="@dimen/orderSubmitButtonWidth"
+            android:layout_width="@dimen/shortBlackButtonWidth"
             android:layout_height="@dimen/orderSubmitButtonHeight"
             android:text="Edit Order"/>
     </LinearLayout>

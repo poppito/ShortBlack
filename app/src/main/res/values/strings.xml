@@ -8,6 +8,7 @@
     <string name="orderString">What\'s your order?</string>
     <string name="Gender">(Optional) What\'s your Gender?</string>
     <string name="orderSubmitButton">Submit order?</string>
+    <string name="saveForLaterButton">Save order for next time?</string>
     <string name="orString">Select order below</string>
     <string name="titleString">Welcome to ShortBlack! Please select order below.</string>
     <string name="shortblack_add_another_order_string">Add another order?</string>
@@ -39,7 +40,7 @@
 
     <string-array name="additiveArray">
         <item>Sweetner?</item>
-        <item>none</item>
+        <item>no sugar</item>
         <item>one sugar</item>
         <item>two sugars</item>
         <item>three sugars</item>
