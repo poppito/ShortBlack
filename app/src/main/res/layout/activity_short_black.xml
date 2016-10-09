@@ -91,12 +91,12 @@
             android:orientation="horizontal"
             android:paddingTop="@dimen/linear_layout_spacers">
 
-            <Button
+            <TextView
                 android:id="@+id/closeKeyboard"
                 android:layout_width="10dp"
                 android:layout_height="wrap_content"
                 android:background="@android:color/white"
-                android:text="X"
+                android:text="<-"
                 android:textColor="@android:color/black"
                 android:visibility="gone"
                 android:textSize="12sp"/>

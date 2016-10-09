@@ -34,7 +34,7 @@ public class ShortBlack extends AppCompatActivity implements View.OnClickListene
     private String name;
     private TextView statusText, titleText;
     private ScrollView shortBlackMainScrollView;
-    private Button closeKeyboard;
+    private TextView closeKeyboard;
     private InputMethodManager imm;
 
 
@@ -101,7 +101,7 @@ public class ShortBlack extends AppCompatActivity implements View.OnClickListene
         nameText.addTextChangedListener(this);
         nameText.setOnClickListener(this);
         nameText.setOnFocusChangeListener(this);
-        closeKeyboard = (Button) findViewById(R.id.closeKeyboard);
+        closeKeyboard = (TextView) findViewById(R.id.closeKeyboard);
         closeKeyboard.setVisibility(GONE);
         closeKeyboard.setOnClickListener(this);
         GenerateName g = new GenerateName();
