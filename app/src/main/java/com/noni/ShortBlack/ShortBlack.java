@@ -97,7 +97,6 @@ public class ShortBlack extends AppCompatActivity implements View.OnClickListene
         submitButton.setOnClickListener(this);
         saveButton.setOnClickListener(this);
         shortBlackMainScrollView.setOnClickListener(this);
-        // submitButton.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.button_inactive));
         submitButton.setBackgroundColor(getResources().getColor(R.color.button_inactive));
         nameText.addTextChangedListener(this);
         nameText.setOnClickListener(this);
@@ -201,10 +200,9 @@ public class ShortBlack extends AppCompatActivity implements View.OnClickListene
 
     public void enableButtons() {
         if (allValuesValidated()) {
-
-            //submitButton.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.button_active));
             submitButton.setBackgroundColor(getResources().getColor(R.color.button_active));
             saveButton.setBackgroundColor(getResources().getColor(R.color.button_active));
+            statusText.setText("Order looks A-OK! :)");
         } else {
             //submitButton.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.button_inactive));
             submitButton.setBackgroundColor(getResources().getColor(R.color.button_inactive));
@@ -232,7 +230,7 @@ public class ShortBlack extends AppCompatActivity implements View.OnClickListene
                     statusText.setTextColor(getResources().getColor(R.color.warning_text_colour));
                 } else if (!valuesMap.containsKey("coffeeType")) {
                     //Toast.makeText(getApplicationContext(), "Please select type of coffee for your order!", Toast.LENGTH_SHORT).show();
-                    statusText.setText("Is it a latte? or a flat white? :)");
+                    statusText.setText("What type of coffee? :)");
                     statusText.setTextColor(getResources().getColor(R.color.warning_text_colour));
                 } else if (!valuesMap.containsKey("orderSize")) {
                     //Toast.makeText(getApplicationContext(), "Please select an order size!", Toast.LENGTH_SHORT).show();
@@ -251,6 +249,30 @@ public class ShortBlack extends AppCompatActivity implements View.OnClickListene
                 imm.showSoftInput(nameText, InputMethodManager.SHOW_IMPLICIT);
                 closeKeyboard.setVisibility(View.VISIBLE);
                 break;
+            }
+            case R.id.saveForLater: {
+                if (allValuesValidated()) {
+                    Log.v(TAG, "name is " + name);
+                    FileOperations fileOps = new FileOperations(getApplicationContext(), valuesMap);
+                    fileOps.readFromFile(getApplication());
+                } else if (!valuesMap.containsKey("milkChoice")) {
+                    //Toast.makeText(getApplicationContext(), "What kinda milk? :)", Toast.LENGTH_SHORT).show();
+                    statusText.setText("What kinda milk? :)");
+                    statusText.setTextColor(getResources().getColor(R.color.warning_text_colour));
+                } else if (!valuesMap.containsKey("additiveChoice")) {
+                    //Toast.makeText(getApplicationContext(), "Please select an additive choice your order!", Toast.LENGTH_SHORT).show();
+                    statusText.setText("Any sweetners? :)");
+                    statusText.setTextColor(getResources().getColor(R.color.warning_text_colour));
+                } else if (!valuesMap.containsKey("coffeeType")) {
+                    //Toast.makeText(getApplicationContext(), "Please select type of coffee for your order!", Toast.LENGTH_SHORT).show();
+                    statusText.setText("What type of coffee? :)");
+                    statusText.setTextColor(getResources().getColor(R.color.warning_text_colour));
+                } else if (!valuesMap.containsKey("orderSize")) {
+                    //Toast.makeText(getApplicationContext(), "Please select an order size!", Toast.LENGTH_SHORT).show();
+                    statusText.setText("How about an order size? :)");
+                    statusText.setTextColor(getResources().getColor(R.color.warning_text_colour));
+                    Log.v(TAG, "no order size selected");
+                }
             }
         }
     }
