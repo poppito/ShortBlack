@@ -86,8 +86,8 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="110dp"
-            android:layout_gravity="center"
+            android:layout_height="90dp"
+            android:gravity="center"
             android:orientation="horizontal"
             android:paddingTop="@dimen/linear_layout_spacers">
 
@@ -103,6 +103,7 @@
 
             <EditText
                 android:id="@+id/name"
+                android:gravity="center"
                 android:layout_width="320dp"
                 android:layout_height="@dimen/textHeight"
                 android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
@@ -117,25 +118,25 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="110dp"
+            android:layout_height="80dp"
             android:gravity="center"
             android:orientation="horizontal"
             android:paddingTop="@dimen/linear_layout_spacers">
-
-            <Button
-                android:id="@+id/submitButton"
-                style="@style/shortblack_buttons"
-                android:layout_width="@dimen/shortBlackButtonWidth"
-                android:layout_height="@dimen/orderSubmitButtonHeight"
-                android:layout_marginRight="30dp"
-                android:text="@string/orderSubmitButton"/>
 
             <Button
                 android:id="@+id/saveForLater"
                 style="@style/shortblack_buttons"
                 android:layout_width="@dimen/shortBlackButtonWidth"
                 android:layout_height="@dimen/orderSubmitButtonHeight"
+                android:layout_marginRight="20dp"
                 android:text="@string/shortblack_add_another_order_string"/>
+
+            <Button
+                android:id="@+id/submitButton"
+                style="@style/shortblack_buttons"
+                android:layout_width="@dimen/shortBlackButtonWidth"
+                android:layout_height="@dimen/orderSubmitButtonHeight"
+                android:text="@string/orderSubmitButton"/>
         </LinearLayout>
 
         <TextView

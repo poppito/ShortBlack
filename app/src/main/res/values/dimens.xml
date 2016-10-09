@@ -4,8 +4,8 @@
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="textHeight">50dp</dimen>
     <dimen name="largeTextSize">20dp</dimen>
-    <dimen name="mediumTextSize">15dp</dimen>
-    <dimen name="shortBlackButtonWidth">170dp</dimen>
+    <dimen name="mediumTextSize">12dp</dimen>
+    <dimen name="shortBlackButtonWidth">130dp</dimen>
     <dimen name="orderSubmitButtonHeight">50dp</dimen>
     <dimen name="shortblack_add_another_height">60dp</dimen>
     <dimen name="shortblack_add_another_width">60dp</dimen>
