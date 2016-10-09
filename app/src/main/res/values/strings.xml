@@ -4,7 +4,7 @@
     <string name="tr0">Yeah! Mr. White! Science!</string>
     <string name="tr1">Yeah! Mr. White! Science!</string>
     <string name="tr2">Yeah! Mr. White! Science!</string>
-    <string name="nameString">Enter name or leave blank to randomise!</string>
+    <string name="nameString">Enter name for order, or leave blank to randomise!</string>
     <string name="orderString">What\'s your order?</string>
     <string name="Gender">(Optional) What\'s your Gender?</string>
     <string name="orderSubmitButton">I\'m done</string>

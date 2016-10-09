@@ -91,20 +91,20 @@
             android:orientation="horizontal"
             android:paddingTop="@dimen/linear_layout_spacers">
 
-            <TextView
+            <ImageButton
                 android:id="@+id/closeKeyboard"
-                android:layout_width="10dp"
-                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:scaleType="fitXY"
                 android:background="@android:color/white"
-                android:text="<-"
-                android:textColor="@android:color/black"
                 android:visibility="gone"
-                android:textSize="12sp"/>
+                android:src="@drawable/ic_shortblack_close_keyboard"/>
 
             <EditText
                 android:id="@+id/name"
                 android:gravity="center"
-                android:layout_width="320dp"
+                android:layout_width="300dp"
                 android:layout_height="@dimen/textHeight"
                 android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
                 android:hint="@string/nameString"
@@ -112,10 +112,19 @@
                 android:maxLength="15"
                 android:textColor="@color/textColor"
                 android:textIsSelectable="true"
-                android:textSize="15sp">
+                android:textSize="@dimen/buttonTextSize">
             </EditText>
         </LinearLayout>
-
+        <TextView
+            android:id="@+id/status_message"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/textHeight"
+            android:layout_margin="20dp"
+            android:gravity="center_horizontal"
+            android:text=""
+            android:textColor="@color/textColor"
+            android:textSize="@dimen/mediumTextSize">
+        </TextView>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="80dp"
@@ -138,17 +147,5 @@
                 android:layout_height="@dimen/orderSubmitButtonHeight"
                 android:text="@string/orderSubmitButton"/>
         </LinearLayout>
-
-        <TextView
-            android:id="@+id/status_message"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/textHeight"
-            android:layout_margin="20dp"
-            android:gravity="center_horizontal"
-            android:text=""
-            android:textColor="@color/textColor"
-            android:textSize="@dimen/largeTextSize">
-        </TextView>
-
     </LinearLayout>
 </ScrollView>

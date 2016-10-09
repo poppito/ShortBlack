@@ -16,6 +16,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ScrollView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -34,7 +35,7 @@ public class ShortBlack extends AppCompatActivity implements View.OnClickListene
     private String name;
     private TextView statusText, titleText;
     private ScrollView shortBlackMainScrollView;
-    private TextView closeKeyboard;
+    private ImageButton closeKeyboard;
     private InputMethodManager imm;
 
 
@@ -101,7 +102,7 @@ public class ShortBlack extends AppCompatActivity implements View.OnClickListene
         nameText.addTextChangedListener(this);
         nameText.setOnClickListener(this);
         nameText.setOnFocusChangeListener(this);
-        closeKeyboard = (TextView) findViewById(R.id.closeKeyboard);
+        closeKeyboard = (ImageButton) findViewById(R.id.closeKeyboard);
         closeKeyboard.setVisibility(GONE);
         closeKeyboard.setOnClickListener(this);
         GenerateName g = new GenerateName();
