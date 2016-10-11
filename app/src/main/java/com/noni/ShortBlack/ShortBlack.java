@@ -17,10 +17,12 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ListView;
 import android.widget.ScrollView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import static android.view.View.GONE;
@@ -37,6 +39,9 @@ public class ShortBlack extends AppCompatActivity implements View.OnClickListene
     private ScrollView shortBlackMainScrollView;
     private ImageButton closeKeyboard;
     private InputMethodManager imm;
+    private ListView coffeeOrderList;
+    private ArrayList<String> coffeeOrders;
+    private ArrayAdapter<String> coffeeOrderAdapter;
 
 
     @Override
@@ -62,6 +67,7 @@ public class ShortBlack extends AppCompatActivity implements View.OnClickListene
         nameText = (EditText) findViewById(R.id.name);
         titleText = (TextView) findViewById(R.id.title_message);
         statusText = (TextView) findViewById(R.id.status_message);
+        coffeeOrderList = (ListView) findViewById(R.id.order_list);
 
         Spinner mAdditiveChoicesSpinner = (Spinner) findViewById(R.id.additiveChoicesSpinner);
         Spinner mOrderSizesSpinner = (Spinner) findViewById(R.id.orderSizesSpinner);
@@ -106,6 +112,9 @@ public class ShortBlack extends AppCompatActivity implements View.OnClickListene
         closeKeyboard.setOnClickListener(this);
         GenerateName g = new GenerateName();
         name = g.GenerateName();
+        coffeeOrders = new ArrayList<>();
+        coffeeOrderAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, coffeeOrders);
+        coffeeOrderList.setAdapter(coffeeOrderAdapter);
     }
 
 
@@ -169,6 +178,7 @@ public class ShortBlack extends AppCompatActivity implements View.OnClickListene
 
     public boolean allValuesValidated() {
         if (valuesMap.containsKey("milkChoice") && (valuesMap.containsKey("additiveChoice")) && (valuesMap.containsKey("coffeeType") && valuesMap.containsKey("orderSize"))) {
+            coffeeOrders.add(valuesMap.get("orderSize") + " " + valuesMap.get("coffeeType") + " with " + valuesMap.get("milkChoice") + " and " + valuesMap.get("additiveChoice"));
             return true;
         }
         return false;
@@ -189,6 +199,8 @@ public class ShortBlack extends AppCompatActivity implements View.OnClickListene
     public void onTextChanged(CharSequence s, int start, int before, int count) {
 
     }
+
+
 
     @Override
     public void afterTextChanged(Editable s) {
@@ -252,9 +264,8 @@ public class ShortBlack extends AppCompatActivity implements View.OnClickListene
             }
             case R.id.saveForLater: {
                 if (allValuesValidated()) {
-                    Log.v(TAG, "name is " + name);
-                    FileOperations fileOps = new FileOperations(getApplicationContext(), valuesMap);
-                    fileOps.readFromFile(getApplication());
+                    coffeeOrderAdapter.notifyDataSetChanged();
+                    valuesMap.clear();
                 } else if (!valuesMap.containsKey("milkChoice")) {
                     //Toast.makeText(getApplicationContext(), "What kinda milk? :)", Toast.LENGTH_SHORT).show();
                     statusText.setText("What kinda milk? :)");
