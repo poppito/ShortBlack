@@ -2,6 +2,7 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:app="http://schemas.android.com/apk/res-auto"
             xmlns:tools="http://schemas.android.com/tools"
+            android:id="@+id/shortblack_scrollview_main"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="center_horizontal"
@@ -13,15 +14,12 @@
             tools:context="com.noni.ShortBlack.ShortBlack">
 
     <LinearLayout
+        android:focusableInTouchMode="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:orientation="vertical">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/linear_layout_spacers">
-        </LinearLayout>
+        android:orientation="vertical"
+        android:paddingBottom="@dimen/linear_layout_spacers">
 
         <TextView
             android:id="@+id/title_message"
@@ -30,139 +28,101 @@
             android:gravity="center"
             android:text="@string/titleString"
             android:textColor="@color/textColor"
-            android:textSize="@dimen/largeTextSize">
+            android:textSize="@dimen/largeTextSize"
+            android:layout_marginTop="@dimen/linear_layout_spacers"
+            android:layout_marginBottom="@dimen/linear_layout_spacers">
         </TextView>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/linear_layout_spacers">
-        </LinearLayout>
-
-        <EditText
-            android:id="@+id/Name"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/textHeight"
-            android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
-            android:focusable="true"
-            android:hint="@string/nameString"
-            android:lines="1"
-            android:maxLength="15"
-            android:textColor="@color/textColor"
-            android:textIsSelectable="true"
-            android:textSize="15sp">
-        </EditText>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/linear_layout_spacers">
-        </LinearLayout>
-
         <Spinner
             android:id="@+id/orderSizesSpinner"
             android:layout_width="match_parent"
             android:layout_height="@dimen/textHeight"
-            android:focusableInTouchMode="true"
-            android:gravity="center_horizontal">
+            android:gravity="center_horizontal"
+            android:paddingBottom="@dimen/linear_layout_spacers">
         </Spinner>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/linear_layout_spacers">
-        </LinearLayout>
-
         <Spinner
             android:id="@+id/milkChoicesSpinner"
             android:layout_width="match_parent"
             android:layout_height="@dimen/textHeight"
-            android:focusableInTouchMode="true"
-            android:gravity="center_horizontal">
+            android:gravity="center_horizontal"
+            android:paddingBottom="@dimen/linear_layout_spacers">
         </Spinner>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/linear_layout_spacers">
-        </LinearLayout>
-
         <Spinner
             android:id="@+id/additiveChoicesSpinner"
             android:layout_width="match_parent"
             android:layout_height="@dimen/textHeight"
-            android:focusableInTouchMode="true"
-            android:gravity="center_horizontal">
+            android:gravity="center_horizontal"
+            android:paddingBottom="@dimen/linear_layout_spacers">
         </Spinner>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/linear_layout_spacers">
-        </LinearLayout>
-
         <Spinner
             android:id="@+id/coffeeTypeSpinner"
             android:layout_width="match_parent"
             android:layout_height="@dimen/textHeight"
-            android:focusableInTouchMode="true"
-            android:gravity="center_horizontal">
+            android:gravity="center_horizontal"
+            android:paddingBottom="@dimen/linear_layout_spacers">
         </Spinner>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="110dp"
-            android:orientation="horizontal"
-            android:gravity="center_horizontal"
-            android:paddingTop="@dimen/linear_layout_spacers">
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal">
 
-            <Button
-                android:id="@+id/submitButton"
-                android:layout_width="@dimen/orderSubmitButtonWidth"
-                android:layout_height="@dimen/orderSubmitButtonHeight"
-                android:layout_gravity="left"
-                android:layout_marginRight="40dp"
-                android:textSize="@dimen/mediumTextSize"
-                android:textAllCaps="false"
-                android:background="@color/textColor"
-                android:text="@string/orderSubmitButton"
-                android:textColor="@color/app_background">
-            </Button>
+            <ImageButton
+                android:id="@+id/closeKeyboard"
+                android:padding="5dp"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:scaleType="fitXY"
+                android:src="@android:drawable/arrow_down_float"
+                android:background="@android:color/white"
+                android:visibility="gone"
+                />
 
-            <LinearLayout
-                android:layout_gravity="right"
-                android:gravity="center_horizontal"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginLeft="40dp"
-                >
-
-                <ImageButton
-                    android:id="@+id/fab"
-                    android:layout_width="@dimen/shortblack_add_another_width"
-                    android:layout_height="@dimen/shortblack_add_another_height"
-                    android:layout_gravity="start"
-                    android:layout_margin="0dp"
-                    android:padding="0dp"
-                    android:background="@drawable/ic_shortblack_floating_action_button"
-                    android:scaleType="fitXY"
-                    android:src="@drawable/ic_shortblack_small"
-                    />
-                <TextView
-                    android:textColor="@color/textColor"
-                    android:layout_gravity="end"
-                    android:layout_width="80dp"
-                    android:layout_height="wrap_content"
-                    android:maxLines="2"
-                    android:text="@string/shortblack_add_another_order_string"/>
-            </LinearLayout>
+            <EditText
+                android:id="@+id/name"
+                android:gravity="center"
+                android:layout_width="300dp"
+                android:layout_height="@dimen/textHeight"
+                android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+                android:hint="@string/nameString"
+                android:lines="1"
+                android:maxLength="15"
+                android:textColor="@color/textColor"
+                android:textIsSelectable="false"
+                android:textSize="@dimen/buttonTextSize">
+            </EditText>
         </LinearLayout>
         <TextView
             android:id="@+id/status_message"
-            android:gravity="center_horizontal"
-            android:layout_margin="20dp"
             android:layout_width="match_parent"
             android:layout_height="@dimen/textHeight"
+            android:layout_margin="20dp"
+            android:gravity="center_horizontal"
             android:text=""
             android:textColor="@color/textColor"
-            android:textSize="@dimen/largeTextSize">
+            android:textSize="@dimen/mediumTextSize">
         </TextView>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:paddingTop="@dimen/linear_layout_spacers">
 
+            <Button
+                android:id="@+id/saveForLater"
+                style="@style/shortblack_buttons"
+                android:layout_width="@dimen/shortBlackButtonWidth"
+                android:layout_height="@dimen/orderSubmitButtonHeight"
+                android:layout_marginRight="20dp"
+                android:text="@string/shortblack_add_another_order_string"/>
+
+            <Button
+                android:id="@+id/submitButton"
+                style="@style/shortblack_buttons"
+                android:layout_width="@dimen/shortBlackButtonWidth"
+                android:layout_height="@dimen/orderSubmitButtonHeight"
+                android:text="@string/orderSubmitButton"/>
+        </LinearLayout>
     </LinearLayout>
 </ScrollView>

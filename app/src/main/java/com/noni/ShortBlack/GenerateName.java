@@ -12,7 +12,6 @@ public class GenerateName {
         String namesListG = "Sophia Emma Olivia Ava Isabella Mia Zoe Lily Emily Madelyn Madison Chloe Charlotte Aubrey Avery Abigail Kaylee Layla Harper Ella Amelia Arianna Riley Aria Hailey Hannah Aaliyah Evelyn Addison Mackenzie Adalyn Ellie Brooklyn Nora Scarlett Grace Anna Isabelle Natalie Kaitlyn Lillian Sarah Audrey Elizabeth Leah Annabelle Kylie Mila Claire Victoria Maya Lila Elena Lucy Savannah Gabriella Callie Alaina Sophie Makayla Kennedy Sadie Skyler Allison Caroline Charlie Penelope Alyssa Peyton Samantha Liliana Bailey Maria Reagan Violet Eliana Adeline Eva Stella Keira Katherine Vivian Alice Alexandra Camilla Kayla Alexis Sydney Kaelyn Jasmine Julia Cora Lauren Piper Gianna Paisley Bella London Clara Cadence";
         ArrayList<String> namesListBoys = new ArrayList<String>();
         ArrayList<String> namesListGirls = new ArrayList<String>();
-        WriteToFile w = new WriteToFile();
 
 
         String name = "";
