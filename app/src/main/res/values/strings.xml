@@ -4,13 +4,13 @@
     <string name="tr0">Yeah! Mr. White! Science!</string>
     <string name="tr1">Yeah! Mr. White! Science!</string>
     <string name="tr2">Yeah! Mr. White! Science!</string>
-    <string name="nameString">Enter name for order, or leave blank to randomise!</string>
+    <string name="nameString">Enter name for order or leave blank to randomise!</string>
     <string name="orderString">What\'s your order?</string>
     <string name="Gender">(Optional) What\'s your Gender?</string>
     <string name="orderSubmitButton">I\'m done</string>
     <string name="saveForLaterButton">Save order for next time?</string>
     <string name="orString">Select order below</string>
-    <string name="titleString">Welcome to ShortBlack! Please select order below.</string>
+    <string name="titleString">Please select order below.</string>
     <string name="shortblack_add_another_order_string">Add another order?</string>
 
     <string-array name="genderChoicesArray">
@@ -21,21 +21,21 @@
 
     <string-array name="milkChoicesArray">
         <item>Milk type?</item>
-        <item>No milk</item>
-        <item>Full cream milk</item>
-        <item>Skinny milk</item>
-        <item>Soy milk</item>
-        <item>Almond milk</item>
+        <item>no milk</item>
+        <item>full cream milk</item>
+        <item>skinny milk</item>
+        <item>soy milk</item>
+        <item>almond milk</item>
     </string-array>
 
     <string-array name="orderSizesArray">
         <item>Order size?</item>
-        <item>Short</item>
-        <item>Small</item>
-        <item>Medium</item>
-        <item>Large</item>
-        <item>Tall</item>
-        <item>Shot</item>
+        <item>short</item>
+        <item>small</item>
+        <item>sedium</item>
+        <item>large</item>
+        <item>tall</item>
+        <item>shot</item>
     </string-array>
 
     <string-array name="additiveArray">

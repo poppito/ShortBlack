@@ -4,7 +4,7 @@
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="textHeight">50dp</dimen>
     <dimen name="largeTextSize">20sp</dimen>
-    <dimen name="mediumTextSize">15sp</dimen>
+    <dimen name="mediumTextSize">13sp</dimen>
     <dimen name="buttonTextSize">12sp</dimen>
     <dimen name="shortBlackButtonWidth">130dp</dimen>
     <dimen name="orderSubmitButtonHeight">50dp</dimen>
