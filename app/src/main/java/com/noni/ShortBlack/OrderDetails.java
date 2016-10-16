@@ -6,20 +6,23 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.TextView;
+import android.widget.ListView;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class OrderDetails extends AppCompatActivity implements View.OnClickListener {
 
 
     public final String TAG = OrderDetails.class.getSimpleName();
-    private TextView nameGenerated;
-    private TextView coffeeOrder;
     private Button editButton;
+    private ListView coffeeOrderList;
+    private ArrayAdapter<String> coffeeOrderAdapter;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -39,23 +42,25 @@ public class OrderDetails extends AppCompatActivity implements View.OnClickListe
         }
 
         setContentView(R.layout.activity_order_details);
-      //  nameGenerated = (TextView) findViewById(R.id.nameGenerated);
-        coffeeOrder = (TextView) findViewById(R.id.coffeeOrder);
+        coffeeOrderList = (ListView) findViewById(R.id.order_list);
         editButton = (Button) findViewById(R.id.editButton);
 
         editButton.setOnClickListener(this);
 
         Intent orderDetails = getIntent();
         HashMap<String, String> valuesMap = new HashMap<>();
-        valuesMap = (HashMap<String,String>) orderDetails.getSerializableExtra("orderDetails");
-        coffeeOrder.setText("Coffee order for " + orderDetails.getStringExtra("nameGenerated") + " of a " + valuesMap.get((String) "orderSize") + " " + valuesMap.get((String) "coffeeType") + " with " + valuesMap.get((String) "milkChoice") + " and " + valuesMap.get((String) "additiveChoice") + ".");
-
+        ArrayList<String> coffeeOrders = new ArrayList<String>();
+        coffeeOrders = (ArrayList<String>) orderDetails.getSerializableExtra("orderList");
+        coffeeOrderAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, coffeeOrders);
+        for (String item : coffeeOrders) {
+            Log.v("SomeTag", item);
+        }
+        coffeeOrderList.setAdapter(coffeeOrderAdapter);
     }
 
     @Override
     public void onClick(View v) {
         Intent backToMainActivity = new Intent(this, ShortBlack.class);
         startActivity(backToMainActivity);
-
     }
 }

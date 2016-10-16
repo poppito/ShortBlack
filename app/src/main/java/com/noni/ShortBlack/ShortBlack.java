@@ -19,7 +19,6 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -29,7 +28,7 @@ import java.util.HashMap;
 import static android.view.View.GONE;
 import static com.noni.ShortBlack.R.id.milkChoicesSpinner;
 
-public class ShortBlack extends AppCompatActivity implements OnClickListener, AdapterView.OnItemSelectedListener, TextWatcher, View.OnFocusChangeListener{
+public class ShortBlack extends AppCompatActivity implements OnClickListener, AdapterView.OnItemSelectedListener, TextWatcher, View.OnFocusChangeListener {
 
     private Button submitButton, saveButton;
     private EditText nameText;
@@ -39,15 +38,12 @@ public class ShortBlack extends AppCompatActivity implements OnClickListener, Ad
     private TextView statusText, titleText;
     private ImageButton closeKeyboard;
     private InputMethodManager imm;
-    private ListView coffeeOrderList;
     private ArrayList<String> coffeeOrders;
-    private ArrayAdapter<String> coffeeOrderAdapter;
     private Spinner mAdditiveChoicesSpinner, mMilkChoicesSpinner, mOrderSizesSpinner, mCoffeeTypeSpinner;
     private static final String milkChoice = "milkChoice";
     private static final String orderSize = "orderSize";
     private static final String coffeeType = "coffeeType";
     private static final String additiveCoice = "additiveChoice";
-    private OnClickListener mOnClickListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,7 +67,6 @@ public class ShortBlack extends AppCompatActivity implements OnClickListener, Ad
         nameText = (EditText) findViewById(R.id.name);
         titleText = (TextView) findViewById(R.id.title_message);
         statusText = (TextView) findViewById(R.id.status_message);
-        coffeeOrderList = (ListView) findViewById(R.id.order_list);
 
 
         mAdditiveChoicesSpinner = (Spinner) findViewById(R.id.additiveChoicesSpinner);
@@ -113,11 +108,9 @@ public class ShortBlack extends AppCompatActivity implements OnClickListener, Ad
         closeKeyboard = (ImageButton) findViewById(R.id.closeKeyboard);
         closeKeyboard.setVisibility(GONE);
         closeKeyboard.setOnClickListener(this);
+        coffeeOrders = new ArrayList<>();
         GenerateName g = new GenerateName();
         name = g.GenerateName();
-        coffeeOrders = new ArrayList<>();
-        coffeeOrderAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, coffeeOrders);
-        coffeeOrderList.setAdapter(coffeeOrderAdapter);
     }
 
 
@@ -160,7 +153,21 @@ public class ShortBlack extends AppCompatActivity implements OnClickListener, Ad
                 break;
             }
         }
-        enableButtons();
+        enableSaveButton();
+        enableSubmitButton();
+    }
+
+    public boolean canSubmitOrder() {
+        if (coffeeOrders.size() >= 1 && (! allValuesValidated(valuesMap))) {
+            return true;
+        }
+        else if (allValuesValidated(valuesMap)) {
+            validateGeneratedName();
+            coffeeOrders.add(valuesMap.get(orderSize) + " " + (valuesMap.get(coffeeType)) + " with " + valuesMap.get(milkChoice) + " and " + valuesMap.get(additiveCoice) + " for " + name);
+            name = "";
+            return true;
+        }
+        return false;
     }
 
     public boolean allValuesValidated(HashMap<String, String> map) {
@@ -195,14 +202,24 @@ public class ShortBlack extends AppCompatActivity implements OnClickListener, Ad
     }
 
 
-    public void enableButtons() {
-        if (allValuesValidated(valuesMap)) {
+    public void enableSubmitButton() {
+        if ((coffeeOrders.size() >= 1)) {
             submitButton.setBackgroundColor(getResources().getColor(R.color.button_active));
-            saveButton.setBackgroundColor(getResources().getColor(R.color.button_active));
+        } else if (allValuesValidated(valuesMap)) {
+            submitButton.setBackgroundColor(getResources().getColor(R.color.button_active));
             statusText.setText("Order looks A-OK! :)");
         } else {
             //submitButton.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.button_inactive));
             submitButton.setBackgroundColor(getResources().getColor(R.color.button_inactive));
+        }
+    }
+
+    public void enableSaveButton() {
+        if (allValuesValidated(valuesMap)) {
+            saveButton.setBackgroundColor(getResources().getColor(R.color.button_active));
+            statusText.setText("Order looks A-OK! :)");
+        } else {
+            //submitButton.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.button_inactive));
             saveButton.setBackgroundColor(getResources().getColor(R.color.button_inactive));
 
         }
@@ -219,10 +236,9 @@ public class ShortBlack extends AppCompatActivity implements OnClickListener, Ad
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.submitButton: {
-                if (allValuesValidated(valuesMap)) {
+                if (canSubmitOrder()) {
                     Intent fireUpOrderDetails = new Intent(this, OrderDetails.class);
-                    fireUpOrderDetails.putExtra("orderDetails", valuesMap);
-                    fireUpOrderDetails.putExtra("nameGenerated", name);
+                    fireUpOrderDetails.putExtra("orderList", coffeeOrders);
                     startActivity(fireUpOrderDetails);
                     statusText.setText("");
                 } else {
@@ -234,7 +250,7 @@ public class ShortBlack extends AppCompatActivity implements OnClickListener, Ad
                 closeKeyboard.setVisibility(GONE);
                 break;
             }
-            case R.id.name:  {
+            case R.id.name: {
                 imm.showSoftInput(nameText, InputMethodManager.SHOW_IMPLICIT);
                 closeKeyboard.setVisibility(View.VISIBLE);
                 break;
@@ -260,7 +276,7 @@ public class ShortBlack extends AppCompatActivity implements OnClickListener, Ad
         } else if (map.get(additiveCoice) == null) {
             statusText.setText("Any sweetners? :)");
             statusText.setTextColor(getResources().getColor(R.color.warning_text_colour));
-        } else if (map.get(coffeeType)== null) {
+        } else if (map.get(coffeeType) == null) {
             statusText.setText("What type of coffee? :)");
             statusText.setTextColor(getResources().getColor(R.color.warning_text_colour));
         } else if (map.get(orderSize) == null) {
@@ -277,17 +293,31 @@ public class ShortBlack extends AppCompatActivity implements OnClickListener, Ad
         }
     }
 
-    public void refreshListView(HashMap <String, String> map) {
-        coffeeOrders.add(map.get(orderSize) + "added " + (map.get(coffeeType)) + " with " + map.get(milkChoice) + " and " + map.get(additiveCoice));
-
-        final Snackbar sb = Snackbar.make(findViewById(android.R.id.content), coffeeOrders.get(coffeeOrders.size() - 1), Snackbar.LENGTH_LONG);
+    public void refreshListView(HashMap<String, String> map) {
+        validateGeneratedName();
+        coffeeOrders.add(map.get(orderSize) + " " + (map.get(coffeeType)) + " with " + map.get(milkChoice) + " and " + map.get(additiveCoice) + " for " + name);
+        name = "";
+        for (String item : coffeeOrders) {
+            Log.v("SomeTag", item);
+        }
+        final Snackbar sb = Snackbar.make(findViewById(android.R.id.content), "added a " + coffeeOrders.get(coffeeOrders.size() - 1), Snackbar.LENGTH_LONG);
         sb.setAction("Undo", new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 sb.dismiss();
+                coffeeOrders.remove(coffeeOrders.get(coffeeOrders.size() - 1));
+                for (String item : coffeeOrders) {
+                    Log.v("SomeTag", item);
+                }
             }
         });
         sb.show();
-        coffeeOrderAdapter.notifyDataSetChanged();
+    }
+
+    public void validateGeneratedName() {
+        if ((name == null) || (name.equals(""))) {
+            GenerateName g = new GenerateName();
+            name = g.GenerateName();
+        }
     }
 }
