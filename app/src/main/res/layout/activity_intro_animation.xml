@@ -1,0 +1,45 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="#0099cc"
+              android:orientation="vertical"
+              android:gravity="center"
+              tools:context="com.noni.ShortBlack.IntroAnimationActivity">
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center">
+        <ImageView
+            android:id="@+id/shortblack_intro_circle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/shortblack_300px_bg_circle"
+            android:layout_centerInParent="true"/>
+        <ImageView
+            android:id="@+id/shortblack_intro_steam"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:src="@drawable/shortblack_300px_steam"
+            android:contentDescription="steam"/>
+        <ImageView
+            android:id="@+id/shortblack_intro_cup"
+            android:layout_below="@id/shortblack_intro_steam"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:src="@drawable/shortblack_300px_cup"
+            android:contentDescription="cup"/>
+
+        <ImageView
+            android:layout_below="@+id/shortblack_intro_steam"
+            android:id="@+id/shortblack_intro_heart"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:src="@drawable/shortblack_300px_heart"
+            android:contentDescription="heart"/>
+    </RelativeLayout>
+</FrameLayout>

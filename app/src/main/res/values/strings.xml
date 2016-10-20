@@ -59,4 +59,8 @@
     </string-array>
     <string name="title_activity_find_it">Map</string>
     <string name="title_activity_order_details">Order_details</string>
+
+    <string name="title_activity_intro_animation">IntroAnimationActivity</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
 </resources>
