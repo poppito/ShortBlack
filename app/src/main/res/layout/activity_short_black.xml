@@ -71,8 +71,7 @@
                 android:id="@+id/closeKeyboard"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_shortblack_close_keyboard"
-                android:background="@android:color/white"
+                android:background="@drawable/ic_shortblack_close_keyboard"
                 android:visibility="gone"
                 />
 
@@ -116,6 +115,8 @@
                 android:text="@string/shortblack_add_another_order_string"/>
 
             <Button
+                android:drawableEnd="@drawable/ic_shortblack_submit"
+                android:paddingRight="20dp"
                 android:id="@+id/submitButton"
                 style="@style/shortblack_buttons"
                 android:layout_width="@dimen/shortBlackButtonWidth"

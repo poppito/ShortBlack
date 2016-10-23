@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.ArrayAdapter;
@@ -23,6 +22,7 @@ public class OrderDetails extends AppCompatActivity implements View.OnClickListe
     private Button editButton;
     private ListView coffeeOrderList;
     private ArrayAdapter<String> coffeeOrderAdapter;
+    private ArrayList<String> coffeeOrders;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -49,18 +49,16 @@ public class OrderDetails extends AppCompatActivity implements View.OnClickListe
 
         Intent orderDetails = getIntent();
         HashMap<String, String> valuesMap = new HashMap<>();
-        ArrayList<String> coffeeOrders = new ArrayList<String>();
         coffeeOrders = (ArrayList<String>) orderDetails.getSerializableExtra("orderList");
         coffeeOrderAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, coffeeOrders);
-        for (String item : coffeeOrders) {
-            Log.v("SomeTag", item);
-        }
         coffeeOrderList.setAdapter(coffeeOrderAdapter);
     }
 
     @Override
     public void onClick(View v) {
         Intent backToMainActivity = new Intent(this, ShortBlack.class);
+        backToMainActivity.putExtra("orderList", coffeeOrders);
         startActivity(backToMainActivity);
+        finish();
     }
 }

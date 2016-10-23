@@ -1,5 +1,7 @@
 package com.noni.ShortBlack;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -37,18 +39,19 @@ public class IntroAnimationActivity extends AppCompatActivity {
         shortblackHeart = (ImageView) findViewById(R.id.shortblack_intro_heart);
         shortblackCup = (ImageView) findViewById(R.id.shortblack_intro_cup);
         shortblackCircle = (ImageView) findViewById(R.id.shortblack_intro_circle);
-
-        heartBeat(shortblackHeart);
+        heartBeat(shortblackHeart, this);
     }
 
-    private void heartBeat(View v) {
+    private void heartBeat(View v, final Context c) {
         Animation animation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.heart_beat);
         v.startAnimation(animation);
-        circleJerk(shortblackCircle);
-    }
-
-    private void circleJerk(View v) {
-        Animation animation = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.circle_jerk);
-        v.startAnimation(animation);
+        v.postOnAnimationDelayed(new Runnable() {
+            @Override
+            public void run() {
+                Intent i = new Intent(c.getApplicationContext(), ShortBlack.class);
+                startActivity(i);
+                finish();
+            }
+        }, 3000l);
     }
 }

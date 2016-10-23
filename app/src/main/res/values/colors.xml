@@ -1,16 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimary">@color/primary_color</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
-    <color name="textColor">#000000</color>
-    <color name="buttonTextColor">#ffffff</color>
+    <color name="textColor">@color/all_text_color</color>
+    <color name="buttonTextColor">@color/all_text_color</color>
     <color name="borders">#000000</color>
-    <color name="app_background">#ffffff</color>
+    <color name="app_background">@color/primary_color</color>
     <color name="button_active">#000000</color>
-    <color name="button_inactive">#95746C</color>
+    <color name="button_inactive">@color/secondary_color</color>
     <color name="warning_text_colour">#ff0000</color>
     <color name="warning_text_contrast">#000000</color>
-
+    <color name="primary_color">#0099cc</color>
+    <color name="secondary_color">#28C7FC</color>
     <color name="black_overlay">#66000000</color>
+    <color name="all_text_color">#ffffff</color>
 </resources>

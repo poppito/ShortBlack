@@ -1,7 +1,6 @@
 package com.noni.ShortBlack;
 
 import android.content.Context;
-import android.util.Log;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -57,7 +56,6 @@ public class FileOperations  {
 
         while (it.hasNext()) {
             Map.Entry pair = (Map.Entry) it.next();
-            Log.v("SomeTag", pair.getKey().toString() + " key" + pair.getValue().toString() + " value");
         }
         return mOrders;
     }

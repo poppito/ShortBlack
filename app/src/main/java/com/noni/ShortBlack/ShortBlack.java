@@ -241,6 +241,7 @@ public class ShortBlack extends AppCompatActivity implements OnClickListener, Ad
                     fireUpOrderDetails.putExtra("orderList", coffeeOrders);
                     startActivity(fireUpOrderDetails);
                     statusText.setText("");
+                    finish();
                 } else {
                     notifyIncompleteOrder(valuesMap, statusText);
                 }
@@ -297,18 +298,12 @@ public class ShortBlack extends AppCompatActivity implements OnClickListener, Ad
         validateGeneratedName();
         coffeeOrders.add(map.get(orderSize) + " " + (map.get(coffeeType)) + " with " + map.get(milkChoice) + " and " + map.get(additiveCoice) + " for " + name);
         name = "";
-        for (String item : coffeeOrders) {
-            Log.v("SomeTag", item);
-        }
         final Snackbar sb = Snackbar.make(findViewById(android.R.id.content), "added a " + coffeeOrders.get(coffeeOrders.size() - 1), Snackbar.LENGTH_LONG);
         sb.setAction("Undo", new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 sb.dismiss();
                 coffeeOrders.remove(coffeeOrders.get(coffeeOrders.size() - 1));
-                for (String item : coffeeOrders) {
-                    Log.v("SomeTag", item);
-                }
             }
         });
         sb.show();
