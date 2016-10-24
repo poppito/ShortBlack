@@ -1,4 +1,4 @@
-package com.noni.ShortBlack;
+package com.noni.Orderise;
 
 import android.content.Context;
 import android.content.Intent;
@@ -26,13 +26,13 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import static android.view.View.GONE;
-import static com.noni.ShortBlack.R.id.milkChoicesSpinner;
+import static com.noni.Orderise.R.id.milkChoicesSpinner;
 
-public class ShortBlack extends AppCompatActivity implements OnClickListener, AdapterView.OnItemSelectedListener, TextWatcher, View.OnFocusChangeListener {
+public class Orderise extends AppCompatActivity implements OnClickListener, AdapterView.OnItemSelectedListener, TextWatcher, View.OnFocusChangeListener {
 
     private Button submitButton, saveButton;
     private EditText nameText;
-    private String TAG = ShortBlack.class.getSimpleName();
+    private String TAG = Orderise.class.getSimpleName();
     private HashMap<String, String> valuesMap = new HashMap<>();
     private String name;
     private TextView statusText, titleText;

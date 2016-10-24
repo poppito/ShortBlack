@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">expressO</string>
+    <string name="app_name">Orderise</string>
     <string name="introString">Yeah! Mr. White! Science!</string>
     <string name="nameString">Enter name for order or leave blank to randomise!</string>
     <string name="orderString">What\'s your order?</string>

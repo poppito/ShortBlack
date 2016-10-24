@@ -1,4 +1,4 @@
-package com.noni.ShortBlack;
+package com.noni.Orderise;
 
 import android.content.Intent;
 import android.os.Build;
@@ -56,7 +56,7 @@ public class OrderDetails extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View v) {
-        Intent backToMainActivity = new Intent(this, ShortBlack.class);
+        Intent backToMainActivity = new Intent(this, Orderise.class);
         backToMainActivity.putExtra("orderList", coffeeOrders);
         startActivity(backToMainActivity);
         finish();

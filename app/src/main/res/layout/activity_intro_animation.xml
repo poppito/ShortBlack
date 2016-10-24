@@ -5,7 +5,7 @@
               android:background="@color/primary_color"
               android:gravity="center"
               android:orientation="vertical"
-              tools:context="com.noni.ShortBlack.IntroAnimationActivity">
+              tools:context="com.noni.Orderise.IntroAnimationActivity">
 
     <RelativeLayout
         android:layout_width="wrap_content"

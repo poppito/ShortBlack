@@ -1,4 +1,4 @@
-package com.noni.ShortBlack;
+package com.noni.Orderise;
 
 import android.content.Context;
 import android.content.Intent;
@@ -48,7 +48,7 @@ public class IntroAnimationActivity extends AppCompatActivity {
         v.postOnAnimationDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent i = new Intent(c.getApplicationContext(), ShortBlack.class);
+                Intent i = new Intent(c.getApplicationContext(), Orderise.class);
                 startActivity(i);
                 finish();
             }
