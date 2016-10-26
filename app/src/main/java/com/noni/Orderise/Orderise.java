@@ -39,11 +39,12 @@ public class Orderise extends AppCompatActivity implements OnClickListener, Adap
     private ImageButton closeKeyboard;
     private InputMethodManager imm;
     private ArrayList<String> coffeeOrders;
-    private Spinner mAdditiveChoicesSpinner, mMilkChoicesSpinner, mOrderSizesSpinner, mCoffeeTypeSpinner;
+    private Spinner mAdditiveChoicesSpinner, mMilkChoicesSpinner, mOrderSizesSpinner, mCoffeeTypeSpinner, mCoffeeStrengthSpinner;
     private static final String milkChoice = "milkChoice";
     private static final String orderSize = "orderSize";
     private static final String coffeeType = "coffeeType";
     private static final String additiveCoice = "additiveChoice";
+    private static final String coffeeStrength = "strength";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,7 +73,8 @@ public class Orderise extends AppCompatActivity implements OnClickListener, Adap
         mAdditiveChoicesSpinner = (Spinner) findViewById(R.id.additiveChoicesSpinner);
         mOrderSizesSpinner = (Spinner) findViewById(R.id.orderSizesSpinner);
         mCoffeeTypeSpinner = (Spinner) findViewById(R.id.coffeeTypeSpinner);
-        mMilkChoicesSpinner = (Spinner) findViewById(milkChoicesSpinner);
+        mMilkChoicesSpinner = (Spinner) findViewById(R.id.milkChoicesSpinner);
+        mCoffeeStrengthSpinner = (Spinner) findViewById(R.id.coffeeStrength);
 
 
         ArrayAdapter<CharSequence> mAdditiveAdapter = ArrayAdapter.createFromResource(this, R.array.additiveArray, android.R.layout.simple_spinner_item);
@@ -91,11 +93,16 @@ public class Orderise extends AppCompatActivity implements OnClickListener, Adap
         mMilkChoicesAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         mMilkChoicesSpinner.setAdapter(mMilkChoicesAdapter);
 
+        ArrayAdapter<CharSequence> mCoffeeStrengthAdapter = ArrayAdapter.createFromResource(this, R.array.coffeeStrengthArray, android.R.layout.simple_spinner_item);
+        mCoffeeStrengthAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        mCoffeeStrengthSpinner.setAdapter(mCoffeeStrengthAdapter);
+
         //initialise listeners for every single spinner
         mAdditiveChoicesSpinner.setOnItemSelectedListener(this);
         mCoffeeTypeSpinner.setOnItemSelectedListener(this);
         mMilkChoicesSpinner.setOnItemSelectedListener(this);
         mOrderSizesSpinner.setOnItemSelectedListener(this);
+        mCoffeeStrengthSpinner.setOnItemSelectedListener(this);
         imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
 
         //Initialise submit button
@@ -152,6 +159,13 @@ public class Orderise extends AppCompatActivity implements OnClickListener, Adap
                 }
                 break;
             }
+            case R.id.coffeeStrength: {
+                if (position != 0) {
+                    Log.v(TAG, parent.getItemAtPosition(position).toString());
+                    valuesMap.put(coffeeStrength, parent.getItemAtPosition(position).toString());
+                }
+                break;
+            }
         }
         enableSaveButton();
         enableSubmitButton();
@@ -163,7 +177,7 @@ public class Orderise extends AppCompatActivity implements OnClickListener, Adap
         }
         else if (allValuesValidated(valuesMap)) {
             validateGeneratedName();
-            coffeeOrders.add(valuesMap.get(orderSize) + " " + (valuesMap.get(coffeeType)) + " with " + valuesMap.get(milkChoice) + " and " + valuesMap.get(additiveCoice) + " for " + name);
+            coffeeOrders.add(valuesMap.get(orderSize) + " " + (valuesMap.get(coffeeStrength)) + " " + (valuesMap.get(coffeeType)) + " with " + valuesMap.get(milkChoice) + " and " + valuesMap.get(additiveCoice) + " for " + name);
             name = "";
             return true;
         }
@@ -171,7 +185,7 @@ public class Orderise extends AppCompatActivity implements OnClickListener, Adap
     }
 
     public boolean allValuesValidated(HashMap<String, String> map) {
-        if ((map.get(coffeeType) != null) && (map.get(orderSize) != null) && (map.get(additiveCoice) != null) && (map.get(milkChoice) != null)) {
+        if ((map.get(coffeeType) != null) && (map.get(orderSize) != null) && (map.get(additiveCoice) != null) && (map.get(milkChoice) != null) && (map.get(coffeeStrength) != null)) {
             return true;
         }
         return false;
@@ -230,6 +244,7 @@ public class Orderise extends AppCompatActivity implements OnClickListener, Adap
         mCoffeeTypeSpinner.setSelection(0);
         mMilkChoicesSpinner.setSelection(0);
         mOrderSizesSpinner.setSelection(0);
+        mCoffeeStrengthSpinner.setSelection(0);
     }
 
     @Override
@@ -283,6 +298,8 @@ public class Orderise extends AppCompatActivity implements OnClickListener, Adap
         } else if (map.get(orderSize) == null) {
             statusText.setText("How about an order size? :)");
             statusText.setTextColor(getResources().getColor(R.color.warning_text_colour));
+        } else if (map.get(coffeeStrength) == null) {
+            statusText.setText("How about coffee strength? :)");
         }
     }
 
@@ -296,7 +313,7 @@ public class Orderise extends AppCompatActivity implements OnClickListener, Adap
 
     public void refreshListView(HashMap<String, String> map) {
         validateGeneratedName();
-        coffeeOrders.add(map.get(orderSize) + " " + (map.get(coffeeType)) + " with " + map.get(milkChoice) + " and " + map.get(additiveCoice) + " for " + name);
+        coffeeOrders.add(valuesMap.get(orderSize) + " " + (valuesMap.get(coffeeStrength)) + " " + (valuesMap.get(coffeeType)) + " with " + valuesMap.get(milkChoice) + " and " + valuesMap.get(additiveCoice) + " for " + name);
         name = "";
         final Snackbar sb = Snackbar.make(findViewById(android.R.id.content), "added a " + coffeeOrders.get(coffeeOrders.size() - 1), Snackbar.LENGTH_LONG);
         sb.setAction("Undo", new View.OnClickListener() {

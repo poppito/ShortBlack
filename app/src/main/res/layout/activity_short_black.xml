@@ -47,6 +47,13 @@
             android:paddingBottom="@dimen/linear_layout_spacers">
         </Spinner>
         <Spinner
+            android:id="@+id/coffeeStrength"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/textHeight"
+            android:gravity="center_horizontal"
+            android:paddingBottom="@dimen/linear_layout_spacers">
+        </Spinner>
+        <Spinner
             android:id="@+id/additiveChoicesSpinner"
             android:layout_width="match_parent"
             android:layout_height="@dimen/textHeight"

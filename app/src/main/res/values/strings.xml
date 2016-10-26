@@ -44,7 +44,13 @@
         <item>four sugars</item>
         <item>honey</item>
     </string-array>
-
+    <string-array name="coffeeStrengthArray">
+        <item>Coffee Strength?</item>
+        <item>single shot</item>
+        <item>double shot</item>
+        <item>strong </item>
+        <item>decaf</item>
+    </string-array>
     <string-array name="cofeeTypeArray">
         <item>Coffee type?</item>
         <item>Latte</item>
@@ -53,7 +59,6 @@
         <item>Mochaccino</item>
         <item>Flat White</item>
         <item>Chai Latte</item>
-        <item>Decaf</item>
     </string-array>
     <string name="title_activity_find_it">Map</string>
     <string name="title_activity_order_details">Order_details</string>
