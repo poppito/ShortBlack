@@ -123,7 +123,8 @@
 
             <Button
                 android:drawableEnd="@drawable/ic_shortblack_submit"
-                android:paddingRight="20dp"
+                android:paddingRight="10dp"
+                android:paddingLeft="15dp"
                 android:id="@+id/submitButton"
                 style="@style/shortblack_buttons"
                 android:layout_width="@dimen/shortBlackButtonWidth"
