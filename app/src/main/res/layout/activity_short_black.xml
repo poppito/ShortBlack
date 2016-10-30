@@ -14,10 +14,10 @@
             tools:context="com.noni.Orderise.ShortBlack">
 
     <LinearLayout
-        android:focusableInTouchMode="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
+        android:focusableInTouchMode="true"
         android:orientation="vertical"
         android:paddingBottom="@dimen/linear_layout_spacers">
 
@@ -25,13 +25,14 @@
             android:id="@+id/title_message"
             android:layout_width="match_parent"
             android:layout_height="@dimen/textHeight"
+            android:layout_marginBottom="@dimen/linear_layout_spacers"
+            android:layout_marginTop="@dimen/linear_layout_spacers"
             android:gravity="center"
             android:text="@string/titleString"
             android:textColor="@color/textColor"
-            android:textSize="@dimen/largeTextSize"
-            android:layout_marginTop="@dimen/linear_layout_spacers"
-            android:layout_marginBottom="@dimen/linear_layout_spacers">
+            android:textSize="@dimen/largeTextSize">
         </TextView>
+
         <Spinner
             android:id="@+id/orderSizesSpinner"
             android:layout_width="match_parent"
@@ -39,6 +40,7 @@
             android:gravity="center_horizontal"
             android:paddingBottom="@dimen/linear_layout_spacers">
         </Spinner>
+
         <Spinner
             android:id="@+id/milkChoicesSpinner"
             android:layout_width="match_parent"
@@ -46,6 +48,7 @@
             android:gravity="center_horizontal"
             android:paddingBottom="@dimen/linear_layout_spacers">
         </Spinner>
+
         <Spinner
             android:id="@+id/coffeeStrength"
             android:layout_width="match_parent"
@@ -53,6 +56,7 @@
             android:gravity="center_horizontal"
             android:paddingBottom="@dimen/linear_layout_spacers">
         </Spinner>
+
         <Spinner
             android:id="@+id/additiveChoicesSpinner"
             android:layout_width="match_parent"
@@ -60,6 +64,7 @@
             android:gravity="center_horizontal"
             android:paddingBottom="@dimen/linear_layout_spacers">
         </Spinner>
+
         <Spinner
             android:id="@+id/coffeeTypeSpinner"
             android:layout_width="match_parent"
@@ -67,6 +72,37 @@
             android:gravity="center_horizontal"
             android:paddingBottom="@dimen/linear_layout_spacers">
         </Spinner>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:id="@+id/close_special_orders"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/ic_shortblack_close_keyboard"
+                android:visibility="gone"
+                />
+
+            <EditText
+                android:id="@+id/special_instructions"
+                android:layout_width="280dp"
+                android:layout_height="@dimen/textHeight"
+                android:hint="@string/special_instructions"
+                android:background="@drawable/shortblack_edittext_background"
+                android:lines="1"
+                android:maxLength="50"
+                android:maxLines="3"
+                android:minLines="2"
+                android:textColor="@color/textColor"
+                android:textIsSelectable="false"
+                android:padding="5dp"
+                android:textSize="@dimen/mediumTextSize">
+            </EditText>
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -84,10 +120,10 @@
 
             <EditText
                 android:id="@+id/name"
-                android:gravity="center"
                 android:layout_width="300dp"
                 android:layout_height="@dimen/textHeight"
                 android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+                android:gravity="center"
                 android:hint="@string/nameString"
                 android:lines="1"
                 android:maxLength="15"
@@ -96,6 +132,7 @@
                 android:textSize="@dimen/mediumTextSize">
             </EditText>
         </LinearLayout>
+
         <TextView
             android:id="@+id/status_message"
             android:layout_width="match_parent"
@@ -106,6 +143,7 @@
             android:textColor="@color/textColor"
             android:textSize="@dimen/mediumTextSize">
         </TextView>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="80dp"
@@ -122,13 +160,13 @@
                 android:text="@string/shortblack_add_another_order_string"/>
 
             <Button
-                android:drawableEnd="@drawable/ic_shortblack_submit"
-                android:paddingRight="10dp"
-                android:paddingLeft="15dp"
                 android:id="@+id/submitButton"
                 style="@style/shortblack_buttons"
                 android:layout_width="@dimen/shortBlackButtonWidth"
                 android:layout_height="@dimen/orderSubmitButtonHeight"
+                android:drawableEnd="@drawable/ic_shortblack_submit"
+                android:paddingLeft="15dp"
+                android:paddingRight="10dp"
                 android:text="@string/orderSubmitButton"/>
         </LinearLayout>
     </LinearLayout>

@@ -31,12 +31,12 @@ import static com.noni.Orderise.R.id.milkChoicesSpinner;
 public class Orderise extends AppCompatActivity implements OnClickListener, AdapterView.OnItemSelectedListener, TextWatcher, View.OnFocusChangeListener {
 
     private Button submitButton, saveButton;
-    private EditText nameText;
+    private EditText nameText, special_orders;
     private String TAG = Orderise.class.getSimpleName();
     private HashMap<String, String> valuesMap = new HashMap<>();
     private String name;
     private TextView statusText, titleText;
-    private ImageButton closeKeyboard;
+    private ImageButton closeKeyboard, close_special_orders;
     private InputMethodManager imm;
     private ArrayList<String> coffeeOrders;
     private Spinner mAdditiveChoicesSpinner, mMilkChoicesSpinner, mOrderSizesSpinner, mCoffeeTypeSpinner, mCoffeeStrengthSpinner;
@@ -66,8 +66,11 @@ public class Orderise extends AppCompatActivity implements OnClickListener, Adap
         submitButton = (Button) findViewById(R.id.submitButton);
         saveButton = (Button) findViewById(R.id.saveForLater);
         nameText = (EditText) findViewById(R.id.name);
+        special_orders = (EditText) findViewById(R.id.special_instructions);
         titleText = (TextView) findViewById(R.id.title_message);
         statusText = (TextView) findViewById(R.id.status_message);
+        close_special_orders = (ImageButton) findViewById(R.id.close_special_orders);
+        closeKeyboard = (ImageButton) findViewById(R.id.closeKeyboard);
 
 
         mAdditiveChoicesSpinner = (Spinner) findViewById(R.id.additiveChoicesSpinner);
@@ -111,11 +114,13 @@ public class Orderise extends AppCompatActivity implements OnClickListener, Adap
         submitButton.setBackgroundColor(getResources().getColor(R.color.button_inactive));
         nameText.addTextChangedListener(this);
         nameText.setOnClickListener(this);
+        special_orders.setOnClickListener(this);
         nameText.setOnFocusChangeListener(this);
-        closeKeyboard = (ImageButton) findViewById(R.id.closeKeyboard);
+        special_orders.setOnFocusChangeListener(this);
         closeKeyboard.setVisibility(GONE);
         closeKeyboard.setOnClickListener(this);
         coffeeOrders = new ArrayList<>();
+        close_special_orders.setOnClickListener(this);
         GenerateName g = new GenerateName();
         name = g.GenerateName();
     }
@@ -172,10 +177,9 @@ public class Orderise extends AppCompatActivity implements OnClickListener, Adap
     }
 
     public boolean canSubmitOrder() {
-        if (coffeeOrders.size() >= 1 && (! allValuesValidated(valuesMap))) {
+        if (coffeeOrders.size() >= 1 && (!allValuesValidated(valuesMap))) {
             return true;
-        }
-        else if (allValuesValidated(valuesMap)) {
+        } else if (allValuesValidated(valuesMap)) {
             validateGeneratedName();
             coffeeOrders.add(valuesMap.get(orderSize) + " " + (valuesMap.get(coffeeStrength)) + " " + (valuesMap.get(coffeeType)) + " with " + valuesMap.get(milkChoice) + " and " + valuesMap.get(additiveCoice) + " for " + name);
             name = "";
@@ -280,6 +284,17 @@ public class Orderise extends AppCompatActivity implements OnClickListener, Adap
                 } else {
                     notifyIncompleteOrder(valuesMap, statusText);
                 }
+                break;
+            }
+            case R.id.special_instructions: {
+                imm.showSoftInput(special_orders, InputMethodManager.SHOW_IMPLICIT);
+                close_special_orders.setVisibility(View.VISIBLE);
+                break;
+            }
+            case R.id.close_special_orders: {
+                imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+                close_special_orders.setVisibility(GONE);
+                break;
             }
         }
     }
@@ -288,16 +303,16 @@ public class Orderise extends AppCompatActivity implements OnClickListener, Adap
     public void notifyIncompleteOrder(HashMap<String, String> map, TextView statusText) {
         if (map.get(milkChoice) == null) {
             statusText.setText("What kinda milk? :)");
-            statusText.setTextColor(getResources().getColor(R.color.warning_text_colour));
+            statusText.setTextColor(getResources().getColor(R.color.textColor));
         } else if (map.get(additiveCoice) == null) {
             statusText.setText("Any sweetners? :)");
-            statusText.setTextColor(getResources().getColor(R.color.warning_text_colour));
+            statusText.setTextColor(getResources().getColor(R.color.textColor));
         } else if (map.get(coffeeType) == null) {
             statusText.setText("What type of coffee? :)");
-            statusText.setTextColor(getResources().getColor(R.color.warning_text_colour));
+            statusText.setTextColor(getResources().getColor(R.color.textColor));
         } else if (map.get(orderSize) == null) {
             statusText.setText("How about an order size? :)");
-            statusText.setTextColor(getResources().getColor(R.color.warning_text_colour));
+            statusText.setTextColor(getResources().getColor(R.color.textColor));
         } else if (map.get(coffeeStrength) == null) {
             statusText.setText("How about coffee strength? :)");
         }
@@ -308,6 +323,9 @@ public class Orderise extends AppCompatActivity implements OnClickListener, Adap
         if (nameText.hasFocus()) {
             imm.showSoftInput(nameText, InputMethodManager.SHOW_IMPLICIT);
             closeKeyboard.setVisibility(View.VISIBLE);
+        } else if (special_orders.hasFocus()) {
+            imm.showSoftInput(nameText, InputMethodManager.SHOW_IMPLICIT);
+            close_special_orders.setVisibility(View.VISIBLE);
         }
     }
 

@@ -53,12 +53,15 @@
     </string-array>
     <string-array name="cofeeTypeArray">
         <item>Coffee type?</item>
+        <item>Espresso</item>
         <item>Latte</item>
         <item>Capuccino</item>
         <item>Mocha</item>
         <item>Mochaccino</item>
         <item>Flat White</item>
         <item>Chai Latte</item>
+        <item>Hot Chocolate</item>
+
     </string-array>
     <string name="title_activity_find_it">Map</string>
     <string name="title_activity_order_details">Order_details</string>
@@ -66,4 +69,5 @@
     <string name="title_activity_intro_animation">IntroAnimationActivity</string>
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="special_instructions">Special requests e.g. cream, warm, extra hot (subject to availability)</string>
 </resources>
