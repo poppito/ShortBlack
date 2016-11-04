@@ -13,7 +13,6 @@ import android.widget.Button;
 import android.widget.ListView;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class OrderDetails extends AppCompatActivity implements View.OnClickListener {
 
@@ -23,6 +22,7 @@ public class OrderDetails extends AppCompatActivity implements View.OnClickListe
     private ListView coffeeOrderList;
     private ArrayAdapter<String> coffeeOrderAdapter;
     private ArrayList<String> coffeeOrders;
+    private String special_order_text;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -48,8 +48,7 @@ public class OrderDetails extends AppCompatActivity implements View.OnClickListe
         editButton.setOnClickListener(this);
 
         Intent orderDetails = getIntent();
-        HashMap<String, String> valuesMap = new HashMap<>();
-        coffeeOrders = (ArrayList<String>) orderDetails.getSerializableExtra("orderList");
+        coffeeOrders = (ArrayList<String>) orderDetails.getSerializableExtra("coffeeOrders");
         coffeeOrderAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, coffeeOrders);
         coffeeOrderList.setAdapter(coffeeOrderAdapter);
     }

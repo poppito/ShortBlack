@@ -28,17 +28,17 @@ import java.util.HashMap;
 import static android.view.View.GONE;
 import static com.noni.Orderise.R.id.milkChoicesSpinner;
 
-public class Orderise extends AppCompatActivity implements OnClickListener, AdapterView.OnItemSelectedListener, TextWatcher, View.OnFocusChangeListener {
+public class Orderise extends AppCompatActivity implements OnClickListener, AdapterView.OnItemSelectedListener, View.OnFocusChangeListener, TextWatcher {
 
     private Button submitButton, saveButton;
     private EditText nameText, special_orders;
     private String TAG = Orderise.class.getSimpleName();
     private HashMap<String, String> valuesMap = new HashMap<>();
-    private String name;
+    private String name, special_order_text;
     private TextView statusText, titleText;
     private ImageButton closeKeyboard, close_special_orders;
     private InputMethodManager imm;
-    private ArrayList<String> coffeeOrders;
+    private ArrayList<String> coffeeOrders, specialOrderList;
     private Spinner mAdditiveChoicesSpinner, mMilkChoicesSpinner, mOrderSizesSpinner, mCoffeeTypeSpinner, mCoffeeStrengthSpinner;
     private static final String milkChoice = "milkChoice";
     private static final String orderSize = "orderSize";
@@ -108,21 +108,24 @@ public class Orderise extends AppCompatActivity implements OnClickListener, Adap
         mCoffeeStrengthSpinner.setOnItemSelectedListener(this);
         imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
 
+        GenerateName g = new GenerateName();
+        name = g.GenerateName();
+
         //Initialise submit button
         submitButton.setOnClickListener(this);
         saveButton.setOnClickListener(this);
         submitButton.setBackgroundColor(getResources().getColor(R.color.button_inactive));
         nameText.addTextChangedListener(this);
+        special_orders.addTextChangedListener(this);
         nameText.setOnClickListener(this);
         special_orders.setOnClickListener(this);
         nameText.setOnFocusChangeListener(this);
         special_orders.setOnFocusChangeListener(this);
         closeKeyboard.setVisibility(GONE);
         closeKeyboard.setOnClickListener(this);
+        specialOrderList = new ArrayList<>();
         coffeeOrders = new ArrayList<>();
         close_special_orders.setOnClickListener(this);
-        GenerateName g = new GenerateName();
-        name = g.GenerateName();
     }
 
 
@@ -182,7 +185,9 @@ public class Orderise extends AppCompatActivity implements OnClickListener, Adap
         } else if (allValuesValidated(valuesMap)) {
             validateGeneratedName();
             coffeeOrders.add(valuesMap.get(orderSize) + " " + (valuesMap.get(coffeeStrength)) + " " + (valuesMap.get(coffeeType)) + " with " + valuesMap.get(milkChoice) + " and " + valuesMap.get(additiveCoice) + " for " + name);
+            validateSpecialOrderText();
             name = "";
+            special_order_text = "";
             return true;
         }
         return false;
@@ -200,23 +205,6 @@ public class Orderise extends AppCompatActivity implements OnClickListener, Adap
 
         Log.v(TAG, "nothing selected");
 
-    }
-
-    @Override
-    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-    }
-
-    @Override
-    public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-    }
-
-    @Override
-    public void afterTextChanged(Editable s) {
-
-        if (s.length() > 0) {
-            name = s.toString();
-        }
     }
 
 
@@ -257,7 +245,8 @@ public class Orderise extends AppCompatActivity implements OnClickListener, Adap
             case R.id.submitButton: {
                 if (canSubmitOrder()) {
                     Intent fireUpOrderDetails = new Intent(this, OrderDetails.class);
-                    fireUpOrderDetails.putExtra("orderList", coffeeOrders);
+                    fireUpOrderDetails.putExtra("coffeeOrders", coffeeOrders);
+                    fireUpOrderDetails.putExtra("specialOrderList", specialOrderList);
                     startActivity(fireUpOrderDetails);
                     statusText.setText("");
                     finish();
@@ -333,12 +322,14 @@ public class Orderise extends AppCompatActivity implements OnClickListener, Adap
         validateGeneratedName();
         coffeeOrders.add(valuesMap.get(orderSize) + " " + (valuesMap.get(coffeeStrength)) + " " + (valuesMap.get(coffeeType)) + " with " + valuesMap.get(milkChoice) + " and " + valuesMap.get(additiveCoice) + " for " + name);
         name = "";
+        specialOrderList.add(special_order_text);
         final Snackbar sb = Snackbar.make(findViewById(android.R.id.content), "added a " + coffeeOrders.get(coffeeOrders.size() - 1), Snackbar.LENGTH_LONG);
         sb.setAction("Undo", new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 sb.dismiss();
                 coffeeOrders.remove(coffeeOrders.get(coffeeOrders.size() - 1));
+                specialOrderList.remove(specialOrderList.get(specialOrderList.size() - 1));
             }
         });
         sb.show();
@@ -348,6 +339,37 @@ public class Orderise extends AppCompatActivity implements OnClickListener, Adap
         if ((name == null) || (name.equals(""))) {
             GenerateName g = new GenerateName();
             name = g.GenerateName();
+        }
+    }
+
+    @Override
+    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+    }
+
+    @Override
+    public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+    }
+
+    @Override
+    public void afterTextChanged(Editable s) {
+
+        if (s.equals(nameText.getEditableText())) {
+            if (s.length() > 0) {
+                name = s.toString();
+            }
+        } else if (s.equals(special_orders.getEditableText())) {
+            if (s.length() > 0) {
+                special_order_text = s.toString();
+            }
+        }
+
+    }
+
+    public void validateSpecialOrderText() {
+        if (special_order_text == null) {
+            special_order_text = "";
         }
     }
 }

@@ -38,6 +38,7 @@
     <string-array name="additiveArray">
         <item>Sweetner?</item>
         <item>no sugar</item>
+        <item>half sugar</item>
         <item>one sugar</item>
         <item>two sugars</item>
         <item>three sugars</item>
