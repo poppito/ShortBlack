@@ -9,6 +9,9 @@ public class CoffeeOrder {
     private String coffeeStrength;
     private String specialOrder;
 
+    public CoffeeOrder() {
+    }
+
     public CoffeeOrder(String milkChoice, String orderSize, String coffeeType, String coffeeStrength) {
 
         this.milkChoice = milkChoice;
