@@ -8,7 +8,6 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 
@@ -18,11 +17,10 @@ public class OrderDetails extends AppCompatActivity implements View.OnClickListe
 
 
     public final String TAG = OrderDetails.class.getSimpleName();
-    private Button editButton;
+    private Button editButton, newOrderButton;
     private ListView coffeeOrderList;
-    private ArrayAdapter<String> coffeeOrderAdapter;
-    private ArrayList<String> coffeeOrders;
-    private String special_order_text;
+    private CoffeeOrderAdapter coffeeOrderAdapter;
+    private ArrayList<CoffeeOrder> coffeeOrders;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -44,20 +42,32 @@ public class OrderDetails extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_order_details);
         coffeeOrderList = (ListView) findViewById(R.id.order_list);
         editButton = (Button) findViewById(R.id.editButton);
+        newOrderButton = (Button) findViewById(R.id.newOrderButton);
 
         editButton.setOnClickListener(this);
+        newOrderButton.setOnClickListener(this);
 
         Intent orderDetails = getIntent();
-        coffeeOrders = (ArrayList<String>) orderDetails.getSerializableExtra("coffeeOrders");
-        coffeeOrderAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, coffeeOrders);
+        coffeeOrders = (ArrayList<CoffeeOrder>) orderDetails.getSerializableExtra("coffeeOrders");
+        coffeeOrderAdapter = new CoffeeOrderAdapter(this.getApplicationContext() , coffeeOrders);
         coffeeOrderList.setAdapter(coffeeOrderAdapter);
     }
 
     @Override
     public void onClick(View v) {
-        Intent backToMainActivity = new Intent(this, Orderise.class);
-        backToMainActivity.putExtra("orderList", coffeeOrders);
-        startActivity(backToMainActivity);
-        finish();
+
+        switch (v.getId()) {
+            case (R.id.newOrderButton): {
+                Intent backToMainActivity = new Intent(this, Orderise.class);
+                startActivity(backToMainActivity);
+                finish();
+                break;
+            }
+            case (R.id.editButton): {
+                FileOperations fops = new FileOperations(this.getApplicationContext(), coffeeOrders);
+                fops.writeToFile(this.getApplicationContext(), coffeeOrders);
+                break;
+            }
+        }
     }
 }
