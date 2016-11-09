@@ -1,6 +1,7 @@
 package com.noni.Orderise;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -21,6 +22,7 @@ public class OrderDetails extends AppCompatActivity implements View.OnClickListe
     private ListView coffeeOrderList;
     private CoffeeOrderAdapter coffeeOrderAdapter;
     private ArrayList<CoffeeOrder> coffeeOrders;
+    private SharedPreferences mPreferences;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -64,8 +66,8 @@ public class OrderDetails extends AppCompatActivity implements View.OnClickListe
                 break;
             }
             case (R.id.editButton): {
-                FileOperations fops = new FileOperations(this.getApplicationContext(), coffeeOrders);
-                fops.writeToFile(this.getApplicationContext(), coffeeOrders);
+                FileOperations fops = new FileOperations();
+                fops.writeToFile(this,coffeeOrders, mPreferences);
                 break;
             }
         }

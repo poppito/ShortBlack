@@ -1,86 +1,79 @@
 package com.noni.Orderise;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.SharedPreferences;
+import android.util.Log;
 
 import com.google.gson.Gson;
 
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.io.OutputStream;
+import java.io.FileReader;
+import java.io.OutputStreamWriter;
+import java.io.Reader;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
-
-import static android.provider.Telephony.Mms.Part.FILENAME;
 
 
 public class FileOperations {
 
-    private Context c;
-    private ArrayList<CoffeeOrder> orders;
+    private static final String FILENAME = "orders";
 
-    public FileOperations(Context c, ArrayList<CoffeeOrder> orders) {
-        this.c = c;
-        this.orders = orders;
+    public FileOperations() {
     }
 
 
-    public void writeToFile(Context c, ArrayList<CoffeeOrder> orders) {
-        try {
+    public void writeToFile(Activity a, ArrayList<CoffeeOrder> orders, SharedPreferences mPreferences) {
 
-            for (int i=0; i<orders.size(); i++) {
-                FileOutputStream fos = c.openFileOutput(String.valueOf(i), Context.MODE_PRIVATE);
-                AppendOutputStream aos = new AppendOutputStream(fos);
-                aos.writeObject(serializeOrders(orders.get(i)));
-                aos.close();
-                fos.close();
+        Context c = a.getApplicationContext();
+
+        try {
+            for (int i = 0; i < orders.size(); i++) {
+                Gson gson = new Gson();
+                String filename = String.valueOf(i);
+                OutputStreamWriter osw = new OutputStreamWriter(c.openFileOutput(filename,Context.MODE_PRIVATE));
+                osw.write(gson.toJson(orders.get(i)));
+                osw.close();
             }
 
         } catch (Exception e) {
             e.printStackTrace();
         }
 
+
+        mPreferences = a.getPreferences(Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = mPreferences.edit();
+        editor.putInt("orderSize", orders.size());
+        editor.commit();
+
+        readFromFile(a, mPreferences);
     }
 
-    public Map readFromFile(Context c) {
-        Map mOrders = new HashMap<>();
-        mOrders.put("coffeType", "");
-        try {
-            FileInputStream fis = new FileInputStream(c.getFilesDir() + "/" + FILENAME);
-            ObjectInputStream ois = new ObjectInputStream(fis);
-            mOrders = (Map) ois.readObject();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        Iterator it = mOrders.entrySet().iterator();
-
-        while (it.hasNext()) {
-            Map.Entry pair = (Map.Entry) it.next();
-        }
-        return mOrders;
-    }
-
-    private class AppendOutputStream extends ObjectOutputStream {
-
-        public AppendOutputStream(OutputStream output) throws IOException {
-            super(output);
-        }
-
-        @Override
-        protected void writeStreamHeader() throws IOException {
-            reset();
-        }
-
-
-    }
-
-    private String serializeOrders(CoffeeOrder coffeeOrder) {
+    public void readFromFile(Activity a, SharedPreferences prefs) {
+        ArrayList<CoffeeOrder> orders = new ArrayList<>();
         Gson gson = new Gson();
-        return gson.toJson(coffeeOrder);
+
+        prefs = a.getPreferences(Context.MODE_PRIVATE);
+        int defaultValue = 5999;
+        int orderSize = prefs.getInt("orderSize", defaultValue);
+
+
+        if (orderSize != defaultValue) {
+
+            for (int i = 0; i < orderSize; i++) {
+                try {
+                    /*
+                    FileInputStream fis = new FileInputStream();
+                    ObjectInputStream ois = new ObjectInputStream(fis);
+                    CoffeeOrder order = gson.fromJson(ois.readObject(), CoffeeOrder); */
+                    Reader reader = new FileReader(a.getApplicationContext().getFilesDir() + "/" + String.valueOf(i));
+                    CoffeeOrder order = gson.fromJson(reader, CoffeeOrder.class);
+
+                    Log.v("SomeTag", order.getOrderName());
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }
     }
 }
