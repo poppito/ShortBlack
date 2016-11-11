@@ -79,4 +79,9 @@
     <string name = "coffeeStrengthMissing">Please select coffee strength!</string>
     <string name = "orderisGood">Order looks A-OK!</string>
 
+    <string name= "orderisePromptTitle">Orderise</string>
+    <string name= "orderisePromptMessage">Previously saved orders found! Would you like to load them instead?</string>
+    <string name= "orderisePromptPositiveButton">Yes</string>
+    <string name= "orderisePromptNegativeButton">No</string>
+
 </resources>

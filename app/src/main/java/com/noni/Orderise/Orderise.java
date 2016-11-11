@@ -2,6 +2,7 @@ package com.noni.Orderise;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
@@ -56,6 +57,8 @@ public class Orderise extends AppCompatActivity implements OnClickListener, Adap
             }
         }
 
+        promptUserIfPrevSavedOrderExists();
+
         coffeeOrders = new ArrayList<CoffeeOrder>();
         setContentView(R.layout.activity_short_black);
         submitButton = (Button) findViewById(R.id.submitButton);
@@ -103,7 +106,6 @@ public class Orderise extends AppCompatActivity implements OnClickListener, Adap
         mCoffeeStrengthSpinner.setOnItemSelectedListener(this);
         imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
 
-        //currentOrder = new CoffeeOrder(this.getApplicationContext());
         currentOrder = new CoffeeOrder();
 
         //Initialise submit button
@@ -129,8 +131,7 @@ public class Orderise extends AppCompatActivity implements OnClickListener, Adap
             case milkChoicesSpinner: {
                 if (position != 0) {
                     currentOrder.setMilkChoice(parent.getItemAtPosition(position).toString());
-                }
-                else {
+                } else {
                     currentOrder.setMilkChoice(null);
                 }
                 break;
@@ -139,8 +140,7 @@ public class Orderise extends AppCompatActivity implements OnClickListener, Adap
             case R.id.additiveChoicesSpinner: {
                 if (position != 0) {
                     currentOrder.setAdditiveChoice(parent.getItemAtPosition(position).toString());
-                }
-                else {
+                } else {
                     currentOrder.setAdditiveChoice(null);
                 }
                 break;
@@ -149,8 +149,7 @@ public class Orderise extends AppCompatActivity implements OnClickListener, Adap
             case R.id.coffeeTypeSpinner: {
                 if (position != 0) {
                     currentOrder.setCoffeeType(parent.getItemAtPosition(position).toString());
-                }
-                else {
+                } else {
                     currentOrder.setCoffeeType(null);
                 }
                 break;
@@ -159,8 +158,7 @@ public class Orderise extends AppCompatActivity implements OnClickListener, Adap
             case R.id.orderSizesSpinner: {
                 if (position != 0) {
                     currentOrder.setOrderSize(parent.getItemAtPosition(position).toString());
-                }
-                else {
+                } else {
                     currentOrder.setOrderSize(null);
                 }
                 break;
@@ -168,8 +166,7 @@ public class Orderise extends AppCompatActivity implements OnClickListener, Adap
             case R.id.coffeeStrength: {
                 if (position != 0) {
                     currentOrder.setCoffeeStrength(parent.getItemAtPosition(position).toString());
-                }
-                else {
+                } else {
                     currentOrder.setCoffeeStrength(null);
                 }
                 break;
@@ -211,8 +208,7 @@ public class Orderise extends AppCompatActivity implements OnClickListener, Adap
     public void enableSaveButton() {
         if (currentOrder.allValuesValidated()) {
             saveButton.setBackgroundColor(getResources().getColor(R.color.button_active));
-        }
-        else {
+        } else {
             disableButtons(saveButton);
         }
     }
@@ -251,9 +247,7 @@ public class Orderise extends AppCompatActivity implements OnClickListener, Adap
                 if (currentOrder.allValuesValidated()) {
                     refreshListView(currentOrder);
                     resetValues();
-                    //currentOrder = new CoffeeOrder(this.getApplicationContext());
                     currentOrder = new CoffeeOrder();
-                } else {
                 }
                 break;
             }
@@ -337,5 +331,24 @@ public class Orderise extends AppCompatActivity implements OnClickListener, Adap
         special_orders.setText("");
         statusText.setText("");
         nameText.setText("");
+    }
+
+    private void promptUserIfPrevSavedOrderExists() {
+        SharedPreferences mPreferences = getSharedPreferences("savedPreferences", Context.MODE_PRIVATE);
+
+        int defaultValue = 99999999;
+
+        int orderSize = mPreferences.getInt("orderSize", defaultValue);
+
+        Log.v("SomeTag", String.valueOf(orderSize) + " is ordersize");
+
+        if (orderSize != defaultValue) {
+            FileOperations readFiles = new FileOperations();
+            OrderiseDialogPrompt prompt = new OrderiseDialogPrompt(getResources().getString(R.string.orderisePromptTitle),
+                    getResources().getString(R.string.orderisePromptMessage), getResources().getString(R.string.orderisePromptPositiveButton),
+                    getResources().getString(R.string.orderisePromptNegativeButton), this, readFiles.readFromFile(this, orderSize));
+            prompt.show(getFragmentManager(), "O");
+
+        }
     }
 }
