@@ -1,21 +1,22 @@
 package com.noni.Orderise;
 
-public class CoffeeOrder {
+import android.content.Context;
+
+import java.io.Serializable;
+
+public class CoffeeOrder implements Serializable {
 
     private String milkChoice;
     private String orderSize;
     private String coffeeType;
-    private String additiveCoice;
+    private String additiveChoice;
     private String coffeeStrength;
     private String specialOrder;
+    private String orderName;
 
-    public CoffeeOrder(String milkChoice, String orderSize, String coffeeType, String coffeeStrength) {
-
-        this.milkChoice = milkChoice;
-        this.orderSize = orderSize;
-        this.coffeeType = coffeeType;
-        this.coffeeStrength = coffeeStrength;
+    public CoffeeOrder() {
     }
+
 
     public String getMilkChoice() {
         return milkChoice;
@@ -50,11 +51,11 @@ public class CoffeeOrder {
     }
 
     public String getAdditiveChoice() {
-        return additiveCoice;
+        return additiveChoice;
     }
 
     public void setAdditiveChoice(String additiveCoice) {
-        this.additiveCoice = additiveCoice;
+        this.additiveChoice = additiveCoice;
     }
 
     public String getOrderSize() {
@@ -66,7 +67,7 @@ public class CoffeeOrder {
     }
 
     public boolean allValuesValidated() {
-        if ((milkChoice != null) && (coffeeType != null) && (coffeeStrength != null) && (additiveCoice != null) && (orderSize != null)) {
+        if ((milkChoice != null) && (coffeeType != null) && (coffeeStrength != null) && (additiveChoice != null) && (orderSize != null)) {
             return true;
         }
         else {
@@ -74,4 +75,40 @@ public class CoffeeOrder {
         }
     }
 
+    public String displayOrder() {
+        if (allValuesValidated()) {
+            return "A " + orderSize + ", " + coffeeStrength + " " + coffeeType + " with " + milkChoice + " and " + additiveChoice + " for " + orderName;
+        }
+        return "";
+    }
+
+    public String checkForOrderCompletion(Context c) {
+        if (allValuesValidated()) {
+            return c.getResources().getString(R.string.orderisGood);
+        }
+        else {
+            if (milkChoice == null) {
+                return c.getResources().getString(R.string.milkMissing);
+            } else if (additiveChoice == null) {
+                return c.getResources().getString(R.string.additiveMissing);
+            } else if (coffeeType == null) {
+                return c.getResources().getString(R.string.coffeeTypeMissing);
+            } else if (orderSize == null) {
+                return c.getResources().getString(R.string.orderSizeMissing);
+            } else if (coffeeStrength == null) {
+                return c.getResources().getString(R.string.coffeeStrengthMissing);
+            }
+            else {
+                return "";
+            }
+        }
+    }
+
+    public void setOrderName(String orderName) {
+        this.orderName = orderName;
+    }
+
+    public String getOrderName() {
+        return orderName;
+    }
 }

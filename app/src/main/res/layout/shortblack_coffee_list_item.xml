@@ -3,23 +3,24 @@
               android:id="@+id/single_coffee_order_item"
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
-              android:orientation="vertical"
-              android:gravity="center_horizontal">
-
-    <TextView android:layout_width="match_parent"
-              android:layout_height="wrap_content"
-              android:id="@+id/coffee_order_item"
-              android:text=""
-              android:textColor="@color/all_text_color"
-              android:textSize="@dimen/buttonTextSize">
+              android:orientation="vertical">
+    <TextView
+        android:id="@+id/coffee_order_item"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:text=""
+        android:textColor="@color/all_text_color"
+        android:textSize="@dimen/buttonTextSize">
     </TextView>
 
-    <TextView android:layout_width="match_parent"
-              android:layout_height="wrap_content"
-              android:text=""
-              android:id="@+id/extras_order_item"
-              android:textColor="@color/all_text_color"
-              android:visibility="gone"
-              android:textSize="@dimen/buttonTextSize">
+    <TextView
+        android:id="@+id/extras_order_item"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:textColor="@color/all_text_color"
+        android:textSize="@dimen/buttonTextSize"
+        android:visibility="invisible">
     </TextView>
 </LinearLayout>

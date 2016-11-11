@@ -2,6 +2,7 @@ package com.noni.Orderise;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
@@ -23,7 +24,6 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import static android.view.View.GONE;
 import static com.noni.Orderise.R.id.milkChoicesSpinner;
@@ -33,18 +33,13 @@ public class Orderise extends AppCompatActivity implements OnClickListener, Adap
     private Button submitButton, saveButton;
     private EditText nameText, special_orders;
     private String TAG = Orderise.class.getSimpleName();
-    private HashMap<String, String> valuesMap = new HashMap<>();
-    private String name, special_order_text;
+    private String name;
     private TextView statusText, titleText;
     private ImageButton closeKeyboard, close_special_orders;
     private InputMethodManager imm;
-    private ArrayList<String> coffeeOrders, specialOrderList;
+    private ArrayList<CoffeeOrder> coffeeOrders;
     private Spinner mAdditiveChoicesSpinner, mMilkChoicesSpinner, mOrderSizesSpinner, mCoffeeTypeSpinner, mCoffeeStrengthSpinner;
-    private static final String milkChoice = "milkChoice";
-    private static final String orderSize = "orderSize";
-    private static final String coffeeType = "coffeeType";
-    private static final String additiveCoice = "additiveChoice";
-    private static final String coffeeStrength = "strength";
+    public CoffeeOrder currentOrder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +57,9 @@ public class Orderise extends AppCompatActivity implements OnClickListener, Adap
             }
         }
 
+        promptUserIfPrevSavedOrderExists();
+
+        coffeeOrders = new ArrayList<CoffeeOrder>();
         setContentView(R.layout.activity_short_black);
         submitButton = (Button) findViewById(R.id.submitButton);
         saveButton = (Button) findViewById(R.id.saveForLater);
@@ -108,8 +106,7 @@ public class Orderise extends AppCompatActivity implements OnClickListener, Adap
         mCoffeeStrengthSpinner.setOnItemSelectedListener(this);
         imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
 
-        GenerateName g = new GenerateName();
-        name = g.GenerateName();
+        currentOrder = new CoffeeOrder();
 
         //Initialise submit button
         submitButton.setOnClickListener(this);
@@ -123,7 +120,6 @@ public class Orderise extends AppCompatActivity implements OnClickListener, Adap
         special_orders.setOnFocusChangeListener(this);
         closeKeyboard.setVisibility(GONE);
         closeKeyboard.setOnClickListener(this);
-        specialOrderList = new ArrayList<>();
         coffeeOrders = new ArrayList<>();
         close_special_orders.setOnClickListener(this);
     }
@@ -134,67 +130,58 @@ public class Orderise extends AppCompatActivity implements OnClickListener, Adap
         switch (parent.getId()) {
             case milkChoicesSpinner: {
                 if (position != 0) {
-                    Log.v(TAG, parent.getItemAtPosition(position).toString());
-                    valuesMap.put(milkChoice, parent.getItemAtPosition(position).toString());
+                    currentOrder.setMilkChoice(parent.getItemAtPosition(position).toString());
+                } else {
+                    currentOrder.setMilkChoice(null);
                 }
                 break;
             }
 
             case R.id.additiveChoicesSpinner: {
                 if (position != 0) {
-                    //pop this into the json object;
-                    Log.v(TAG, parent.getItemAtPosition(position).toString());
-                    valuesMap.put(additiveCoice, parent.getItemAtPosition(position).toString());
+                    currentOrder.setAdditiveChoice(parent.getItemAtPosition(position).toString());
+                } else {
+                    currentOrder.setAdditiveChoice(null);
                 }
                 break;
             }
 
             case R.id.coffeeTypeSpinner: {
                 if (position != 0) {
-                    //pop this into the json object;
-                    Log.v(TAG, parent.getItemAtPosition(position).toString());
-                    valuesMap.put(coffeeType, parent.getItemAtPosition(position).toString());
-
+                    currentOrder.setCoffeeType(parent.getItemAtPosition(position).toString());
+                } else {
+                    currentOrder.setCoffeeType(null);
                 }
                 break;
             }
 
             case R.id.orderSizesSpinner: {
                 if (position != 0) {
-                    //pop this into the json object;
-                    Log.v(TAG, parent.getItemAtPosition(position).toString());
-                    valuesMap.put(orderSize, parent.getItemAtPosition(position).toString());
+                    currentOrder.setOrderSize(parent.getItemAtPosition(position).toString());
+                } else {
+                    currentOrder.setOrderSize(null);
                 }
                 break;
             }
             case R.id.coffeeStrength: {
                 if (position != 0) {
-                    Log.v(TAG, parent.getItemAtPosition(position).toString());
-                    valuesMap.put(coffeeStrength, parent.getItemAtPosition(position).toString());
+                    currentOrder.setCoffeeStrength(parent.getItemAtPosition(position).toString());
+                } else {
+                    currentOrder.setCoffeeStrength(null);
                 }
                 break;
             }
         }
         enableSaveButton();
         enableSubmitButton();
+        statusText.setText(currentOrder.checkForOrderCompletion(this.getApplicationContext()));
     }
 
     public boolean canSubmitOrder() {
-        if (coffeeOrders.size() >= 1 && (!allValuesValidated(valuesMap))) {
+        if (coffeeOrders.size() >= 1 && (!currentOrder.allValuesValidated())) {
             return true;
-        } else if (allValuesValidated(valuesMap)) {
-            validateGeneratedName();
-            coffeeOrders.add(valuesMap.get(orderSize) + " " + (valuesMap.get(coffeeStrength)) + " " + (valuesMap.get(coffeeType)) + " with " + valuesMap.get(milkChoice) + " and " + valuesMap.get(additiveCoice) + " for " + name);
-            validateSpecialOrderText();
-            name = "";
-            special_order_text = "";
-            return true;
-        }
-        return false;
-    }
-
-    public boolean allValuesValidated(HashMap<String, String> map) {
-        if ((map.get(coffeeType) != null) && (map.get(orderSize) != null) && (map.get(additiveCoice) != null) && (map.get(milkChoice) != null) && (map.get(coffeeStrength) != null)) {
+        } else if (currentOrder.allValuesValidated()) {
+            resetValues();
             return true;
         }
         return false;
@@ -209,25 +196,20 @@ public class Orderise extends AppCompatActivity implements OnClickListener, Adap
 
 
     public void enableSubmitButton() {
-        if ((coffeeOrders.size() >= 1)) {
+        if (coffeeOrders.size() >= 1) {
             submitButton.setBackgroundColor(getResources().getColor(R.color.button_active));
-        } else if (allValuesValidated(valuesMap)) {
+        } else if (currentOrder.allValuesValidated()) {
             submitButton.setBackgroundColor(getResources().getColor(R.color.button_active));
-            statusText.setText("Order looks A-OK! :)");
         } else {
-            //submitButton.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.button_inactive));
-            submitButton.setBackgroundColor(getResources().getColor(R.color.button_inactive));
+            disableButtons(submitButton);
         }
     }
 
     public void enableSaveButton() {
-        if (allValuesValidated(valuesMap)) {
+        if (currentOrder.allValuesValidated()) {
             saveButton.setBackgroundColor(getResources().getColor(R.color.button_active));
-            statusText.setText("Order looks A-OK! :)");
         } else {
-            //submitButton.setBackgroundColor(ContextCompat.getColor(getApplicationContext(), R.color.button_inactive));
-            saveButton.setBackgroundColor(getResources().getColor(R.color.button_inactive));
-
+            disableButtons(saveButton);
         }
     }
 
@@ -246,12 +228,9 @@ public class Orderise extends AppCompatActivity implements OnClickListener, Adap
                 if (canSubmitOrder()) {
                     Intent fireUpOrderDetails = new Intent(this, OrderDetails.class);
                     fireUpOrderDetails.putExtra("coffeeOrders", coffeeOrders);
-                    fireUpOrderDetails.putExtra("specialOrderList", specialOrderList);
                     startActivity(fireUpOrderDetails);
-                    statusText.setText("");
                     finish();
                 } else {
-                    notifyIncompleteOrder(valuesMap, statusText);
                 }
             }
             case R.id.closeKeyboard: {
@@ -265,13 +244,10 @@ public class Orderise extends AppCompatActivity implements OnClickListener, Adap
                 break;
             }
             case R.id.saveForLater: {
-                if (allValuesValidated(valuesMap)) {
-                    refreshListView(valuesMap);
-                    statusText.setText("");
-                    resetSpinners();
-                    valuesMap.clear();
-                } else {
-                    notifyIncompleteOrder(valuesMap, statusText);
+                if (currentOrder.allValuesValidated()) {
+                    refreshListView(currentOrder);
+                    resetValues();
+                    currentOrder = new CoffeeOrder();
                 }
                 break;
             }
@@ -289,24 +265,6 @@ public class Orderise extends AppCompatActivity implements OnClickListener, Adap
     }
 
 
-    public void notifyIncompleteOrder(HashMap<String, String> map, TextView statusText) {
-        if (map.get(milkChoice) == null) {
-            statusText.setText("What kinda milk? :)");
-            statusText.setTextColor(getResources().getColor(R.color.textColor));
-        } else if (map.get(additiveCoice) == null) {
-            statusText.setText("Any sweetners? :)");
-            statusText.setTextColor(getResources().getColor(R.color.textColor));
-        } else if (map.get(coffeeType) == null) {
-            statusText.setText("What type of coffee? :)");
-            statusText.setTextColor(getResources().getColor(R.color.textColor));
-        } else if (map.get(orderSize) == null) {
-            statusText.setText("How about an order size? :)");
-            statusText.setTextColor(getResources().getColor(R.color.textColor));
-        } else if (map.get(coffeeStrength) == null) {
-            statusText.setText("How about coffee strength? :)");
-        }
-    }
-
     @Override
     public void onFocusChange(View v, boolean hasFocus) {
         if (nameText.hasFocus()) {
@@ -318,20 +276,9 @@ public class Orderise extends AppCompatActivity implements OnClickListener, Adap
         }
     }
 
-    public void refreshListView(HashMap<String, String> map) {
-        validateGeneratedName();
-        coffeeOrders.add(valuesMap.get(orderSize) + " " + (valuesMap.get(coffeeStrength)) + " " + (valuesMap.get(coffeeType)) + " with " + valuesMap.get(milkChoice) + " and " + valuesMap.get(additiveCoice) + " for " + name);
-        name = "";
-        specialOrderList.add(special_order_text);
-        final Snackbar sb = Snackbar.make(findViewById(android.R.id.content), "added a " + coffeeOrders.get(coffeeOrders.size() - 1), Snackbar.LENGTH_LONG);
-        sb.setAction("Undo", new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                sb.dismiss();
-                coffeeOrders.remove(coffeeOrders.get(coffeeOrders.size() - 1));
-                specialOrderList.remove(specialOrderList.get(specialOrderList.size() - 1));
-            }
-        });
+    public void refreshListView(CoffeeOrder currentOrder) {
+        resetValues();
+        final Snackbar sb = Snackbar.make(findViewById(android.R.id.content), currentOrder.displayOrder(), Snackbar.LENGTH_LONG);
         sb.show();
     }
 
@@ -339,6 +286,7 @@ public class Orderise extends AppCompatActivity implements OnClickListener, Adap
         if ((name == null) || (name.equals(""))) {
             GenerateName g = new GenerateName();
             name = g.GenerateName();
+            currentOrder.setOrderName(name);
         }
     }
 
@@ -358,18 +306,49 @@ public class Orderise extends AppCompatActivity implements OnClickListener, Adap
         if (s.equals(nameText.getEditableText())) {
             if (s.length() > 0) {
                 name = s.toString();
+                currentOrder.setOrderName(name);
             }
         } else if (s.equals(special_orders.getEditableText())) {
             if (s.length() > 0) {
-                special_order_text = s.toString();
+                currentOrder.setSpecialOrder("Special instructions: " + s.toString());
             }
         }
 
     }
 
-    public void validateSpecialOrderText() {
-        if (special_order_text == null) {
-            special_order_text = "";
+    public void disableButtons(Button button) {
+        button.setBackgroundColor(getResources().getColor(R.color.button_inactive));
+    }
+
+    public void resetValues() {
+        if ((currentOrder.displayOrder() != null) && (!currentOrder.displayOrder().equals(""))) {
+            coffeeOrders.add(currentOrder);
+        }
+        validateGeneratedName();
+        currentOrder = new CoffeeOrder();
+        name = "";
+        resetSpinners();
+        special_orders.setText("");
+        statusText.setText("");
+        nameText.setText("");
+    }
+
+    private void promptUserIfPrevSavedOrderExists() {
+        SharedPreferences mPreferences = getSharedPreferences("savedPreferences", Context.MODE_PRIVATE);
+
+        int defaultValue = 99999999;
+
+        int orderSize = mPreferences.getInt("orderSize", defaultValue);
+
+        Log.v("SomeTag", String.valueOf(orderSize) + " is ordersize");
+
+        if (orderSize != defaultValue) {
+            FileOperations readFiles = new FileOperations();
+            OrderiseDialogPrompt prompt = new OrderiseDialogPrompt(getResources().getString(R.string.orderisePromptTitle),
+                    getResources().getString(R.string.orderisePromptMessage), getResources().getString(R.string.orderisePromptPositiveButton),
+                    getResources().getString(R.string.orderisePromptNegativeButton), this, readFiles.readFromFile(this, orderSize));
+            prompt.show(getFragmentManager(), "O");
+
         }
     }
 }

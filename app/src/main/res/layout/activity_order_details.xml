@@ -28,8 +28,9 @@
         android:layout_below="@+id/order_list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:orientation="vertical">
+        android:layout_gravity="center"
+        android:orientation="horizontal"
+        android:background="@android:drawable/screen_background_dark_transparent">
         <Button
             android:layout_gravity="center_horizontal"
             android:background="@color/secondary_color"
@@ -38,6 +39,15 @@
             android:textAllCaps="false"
             android:layout_width="@dimen/shortBlackButtonWidth"
             android:layout_height="@dimen/orderSubmitButtonHeight"
-            android:text="Edit Order"/>
+            android:text="Edit Order?"/>
+        <Button
+            android:layout_gravity="center_horizontal"
+            android:background="@color/secondary_color"
+            android:textColor="@color/all_text_color"
+            android:id="@+id/newOrderButton"
+            android:textAllCaps="false"
+            android:layout_width="@dimen/shortBlackButtonWidth"
+            android:layout_height="@dimen/orderSubmitButtonHeight"
+            android:text="Discard and new order?"/>
     </LinearLayout>
 </RelativeLayout>
