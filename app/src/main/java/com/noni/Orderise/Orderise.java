@@ -23,6 +23,7 @@ import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import static android.view.View.GONE;
@@ -37,9 +38,17 @@ public class Orderise extends AppCompatActivity implements OnClickListener, Adap
     private TextView statusText, titleText;
     private ImageButton closeKeyboard, close_special_orders;
     private InputMethodManager imm;
-    private ArrayList<CoffeeOrder> coffeeOrders;
+    private ArrayListRefreshable<CoffeeOrder> coffeeOrders = new ArrayListRefreshable<>();
     private Spinner mAdditiveChoicesSpinner, mMilkChoicesSpinner, mOrderSizesSpinner, mCoffeeTypeSpinner, mCoffeeStrengthSpinner;
     public CoffeeOrder currentOrder;
+
+    private ArrayListRefreshable<CoffeeOrder> createFromArrayList(ArrayList<CoffeeOrder> list) {
+        ArrayListRefreshable<CoffeeOrder> newList = new ArrayListRefreshable<>();
+        for (CoffeeOrder order : list) {
+            newList.add(order);
+        }
+        return newList;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,9 +66,16 @@ public class Orderise extends AppCompatActivity implements OnClickListener, Adap
             }
         }
 
-        promptUserIfPrevSavedOrderExists();
+        coffeeOrders = new ArrayListRefreshable<>();
+        Intent orderDetails = getIntent();
+        //check whether we're starting a fresh activity or being called back to add more stuff.
+        if (orderDetails.getSerializableExtra("coffeeOrders") == null) {
+            promptUserIfPrevSavedOrderExists();
+            coffeeOrders = new ArrayListRefreshable<CoffeeOrder>();
+        } else {
+            coffeeOrders = createFromArrayList((ArrayList<CoffeeOrder>) orderDetails.getSerializableExtra("coffeeOrders"));
+        }
 
-        coffeeOrders = new ArrayList<CoffeeOrder>();
         setContentView(R.layout.activity_short_black);
         submitButton = (Button) findViewById(R.id.submitButton);
         saveButton = (Button) findViewById(R.id.saveForLater);
@@ -120,7 +136,6 @@ public class Orderise extends AppCompatActivity implements OnClickListener, Adap
         special_orders.setOnFocusChangeListener(this);
         closeKeyboard.setVisibility(GONE);
         closeKeyboard.setOnClickListener(this);
-        coffeeOrders = new ArrayList<>();
         close_special_orders.setOnClickListener(this);
     }
 
@@ -226,8 +241,9 @@ public class Orderise extends AppCompatActivity implements OnClickListener, Adap
         switch (v.getId()) {
             case R.id.submitButton: {
                 if (canSubmitOrder()) {
+                    writeOrdersToFile();
                     Intent fireUpOrderDetails = new Intent(this, OrderDetails.class);
-                    fireUpOrderDetails.putExtra("coffeeOrders", coffeeOrders);
+                    fireUpOrderDetails.putExtra("coffeeOrders", (Serializable) coffeeOrders);
                     startActivity(fireUpOrderDetails);
                     finish();
                 } else {
@@ -347,8 +363,12 @@ public class Orderise extends AppCompatActivity implements OnClickListener, Adap
             OrderiseDialogPrompt prompt = new OrderiseDialogPrompt(getResources().getString(R.string.orderisePromptTitle),
                     getResources().getString(R.string.orderisePromptMessage), getResources().getString(R.string.orderisePromptPositiveButton),
                     getResources().getString(R.string.orderisePromptNegativeButton), this, readFiles.readFromFile(this, orderSize));
-            prompt.show(getFragmentManager(), "O");
-
+            prompt.show(getFragmentManager(), "PromptToLoadExisting");
         }
+    }
+
+    private void writeOrdersToFile() {
+        FileOperations writeOrders = new FileOperations();
+        writeOrders.writeToFile(this,coffeeOrders, this.getApplicationContext().getSharedPreferences("savedPreferences", Context.MODE_PRIVATE));
     }
 }

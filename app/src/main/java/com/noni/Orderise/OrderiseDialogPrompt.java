@@ -15,10 +15,10 @@ public class OrderiseDialogPrompt extends DialogFragment {
 
     private String title, message, positiveButtonText, negativeButtonText;
     private Context context;
-    private ArrayList<CoffeeOrder> orders;
+    private ArrayListRefreshable<CoffeeOrder> orders;
 
 
-    public OrderiseDialogPrompt(String title, String message, String positiveButtonText, String negativeButtonText, Context context, ArrayList<CoffeeOrder> orders) {
+    public OrderiseDialogPrompt(String title, String message, String positiveButtonText, String negativeButtonText, Context context, ArrayListRefreshable<CoffeeOrder> orders) {
         super();
         this.title = title;
         this.message = message;
@@ -37,7 +37,6 @@ public class OrderiseDialogPrompt extends DialogFragment {
         this.negativeButtonText = negativeButtonText;
         this.context = context;
     }
-
 
     public OrderiseDialogPrompt() {
         super();

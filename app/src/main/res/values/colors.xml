@@ -7,13 +7,14 @@
     <color name="buttonTextColor">@color/all_text_color</color>
     <color name="borders">#000000</color>
     <color name="app_background">@color/primary_color</color>
-    <color name="button_active">#000000</color>
+    <color name="button_active">#50C6C4</color>
     <color name="button_inactive">@color/secondary_color</color>
     <color name="warning_text_colour">#ff0000</color>
     <color name="warning_text_contrast">#000000</color>
-    <color name="primary_color">#0099cc</color>
-    <color name="secondary_color">#28C7FC</color>
+    <color name="primary_color_">#0099cc</color>
+    <color name="primary_color">#B7F6DD</color>
+    <color name="secondary_color">#69EEF9</color>
     <color name="black_overlay">#66000000</color>
-    <color name="all_text_color">#ffffff</color>
-    <color name="transparent_dark">#bb000000</color>
+    <color name="all_text_color">#000000</color>
+    <color name="transparent_dark">#af000000</color>
 </resources>
