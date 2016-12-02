@@ -124,12 +124,12 @@ public class OrderDetails extends AppCompatActivity implements View.OnClickListe
                                         coffeeOrders.remove(order);
                                     }
                                 }
-                                refreshListView();
                                 mDeleteButton.setVisibility(View.GONE);
                                 mAddMoreButton.setVisibility(View.GONE);
                                 newOrderButton.setVisibility(View.VISIBLE);
                                 editButton.setVisibility(View.VISIBLE);
                                 showCheckBoxes = !showCheckBoxes;
+                                refreshListView();
                             }
                         });
                         promptForDeleteSome.show(getFragmentManager(), "PromptForDeleteSome");
