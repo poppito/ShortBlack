@@ -19,6 +19,8 @@ import android.widget.ListView;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+import static android.view.View.GONE;
+
 public class OrderDetails extends AppCompatActivity implements View.OnClickListener {
 
 
@@ -83,6 +85,10 @@ public class OrderDetails extends AppCompatActivity implements View.OnClickListe
                 if (coffeeOrders.size() <= 0) {
                     final Snackbar sb = Snackbar.make(findViewById(android.R.id.content), getResources().getString(R.string.nothingToSeeHere), Snackbar.LENGTH_LONG);
                     sb.show();
+                    mDeleteButton.setVisibility(GONE);
+                    editButton.setVisibility(GONE);
+                    mAddMoreButton.setVisibility(GONE);
+                    newOrderButton.setVisibility(GONE);
                     android.os.Handler handler = new android.os.Handler();
                     handler.postDelayed(new Runnable() {
                         @Override
@@ -122,8 +128,8 @@ public class OrderDetails extends AppCompatActivity implements View.OnClickListe
                 if (!showCheckBoxes) {
                     mDeleteButton.setVisibility(View.VISIBLE);
                     mAddMoreButton.setVisibility(View.VISIBLE);
-                    editButton.setVisibility(View.GONE);
-                    newOrderButton.setVisibility(View.GONE);
+                    editButton.setVisibility(GONE);
+                    newOrderButton.setVisibility(GONE);
                     showCheckBoxes = !showCheckBoxes;
                     refreshListView();
                 }
@@ -141,8 +147,8 @@ public class OrderDetails extends AppCompatActivity implements View.OnClickListe
                                         coffeeOrders.remove(order);
                                     }
                                 }
-                                mDeleteButton.setVisibility(View.GONE);
-                                mAddMoreButton.setVisibility(View.GONE);
+                                mDeleteButton.setVisibility(GONE);
+                                mAddMoreButton.setVisibility(GONE);
                                 newOrderButton.setVisibility(View.VISIBLE);
                                 editButton.setVisibility(View.VISIBLE);
                                 showCheckBoxes = !showCheckBoxes;
@@ -153,8 +159,8 @@ public class OrderDetails extends AppCompatActivity implements View.OnClickListe
                     } else {
                         final Snackbar sb = Snackbar.make(findViewById(android.R.id.content), getResources().getString(R.string.nothingToDelete), Snackbar.LENGTH_LONG);
                         sb.show();
-                        mDeleteButton.setVisibility(View.GONE);
-                        mAddMoreButton.setVisibility(View.GONE);
+                        mDeleteButton.setVisibility(GONE);
+                        mAddMoreButton.setVisibility(GONE);
                         newOrderButton.setVisibility(View.VISIBLE);
                         editButton.setVisibility(View.VISIBLE);
                         showCheckBoxes = !showCheckBoxes;

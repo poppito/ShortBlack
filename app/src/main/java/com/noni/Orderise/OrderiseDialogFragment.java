@@ -13,15 +13,15 @@ public class OrderiseDialogFragment extends DialogFragment {
     private String message;
     private DialogInterface.OnClickListener mListener;
 
+    public OrderiseDialogFragment() {
+        super();
+    }
+
     public OrderiseDialogFragment(Context c, String message, DialogInterface.OnClickListener mListener) {
         super();
         this.context = c;
         this.message = message;
         this.mListener = mListener;
-    }
-
-    public OrderiseDialogFragment() {
-        super();
     }
 
     @Override
