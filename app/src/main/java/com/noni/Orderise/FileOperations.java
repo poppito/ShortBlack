@@ -9,8 +9,6 @@ import com.google.gson.Gson;
 import java.io.FileReader;
 import java.io.OutputStreamWriter;
 import java.io.Reader;
-import java.util.ArrayList;
-
 
 public class FileOperations {
 
@@ -20,7 +18,7 @@ public class FileOperations {
     }
 
 
-    public void writeToFile(Activity callingActivity, ArrayList<CoffeeOrder> orders, SharedPreferences mPreferences) {
+    public void writeToFile(Activity callingActivity, ArrayListRefreshable<CoffeeOrder> orders, SharedPreferences mPreferences) {
 
         Context c = callingActivity.getApplicationContext();
 
@@ -38,14 +36,14 @@ public class FileOperations {
         }
 
 
-        mPreferences = callingActivity.getApplication().getSharedPreferences("savedPreferences", Context.MODE_PRIVATE);
+        //mPreferences = callingActivity.getApplication().getSharedPreferences("savedPreferences", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = mPreferences.edit();
         editor.putInt("orderSize", orders.size());
         editor.commit();
     }
 
-    public ArrayList<CoffeeOrder> readFromFile(Activity callingActivity, int orderSize) {
-        ArrayList<CoffeeOrder> orders = new ArrayList<>();
+    public ArrayListRefreshable<CoffeeOrder> readFromFile(Activity callingActivity, int orderSize) {
+        ArrayListRefreshable<CoffeeOrder> orders = new ArrayListRefreshable<>();
         Gson gson = new Gson();
 
         for (int i = 0; i < orderSize; i++) {

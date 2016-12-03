@@ -64,12 +64,9 @@
         <item>Hot Chocolate</item>
 
     </string-array>
-    <string name="title_activity_find_it">Map</string>
     <string name="title_activity_order_details">Order_details</string>
 
     <string name="title_activity_intro_animation">IntroAnimationActivity</string>
-    <string name="dummy_button">Dummy Button</string>
-    <string name="dummy_content">DUMMY\nCONTENT</string>
     <string name="special_instructions">Special requests e.g. cream, warm, extra hot (subject to availability)</string>
 
     <string name = "milkMissing">What kinda milk?</string>
@@ -80,8 +77,11 @@
     <string name = "orderisGood">Order looks A-OK!</string>
 
     <string name= "orderisePromptTitle">Orderise</string>
-    <string name= "orderisePromptMessage">Previously saved orders found! Would you like to load them instead?</string>
+    <string name= "orderisePromptMessage">Previously saved orders found. Would you like to load them instead?</string>
     <string name= "orderisePromptPositiveButton">Yes</string>
     <string name= "orderisePromptNegativeButton">No</string>
-
+    <string name= "orderisePromptBeforeDeleteAll">This will discard all current orders, are you sure you want to proceed?</string>
+    <string name= "orderisePromptBeforeDeleteSome">Are you sure you want to delete these %d orders?</string>
+    <string name= "nothingToDelete">You haven\'t selected anything to delete!</string>
+    <string name= "nothingToSeeHere">"No more orders left! Redirecting to order menu! "</string>
 </resources>

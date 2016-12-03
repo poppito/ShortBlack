@@ -1,53 +1,88 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:tools="http://schemas.android.com/tools"
-            xmlns:app="http://schemas.android.com/apk/res-auto"
-            android:background="@color/app_background"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="center_horizontal"
-            android:paddingBottom="@dimen/activity_vertical_margin"
-            android:paddingLeft="@dimen/activity_horizontal_margin"
-            android:paddingRight="@dimen/activity_horizontal_margin"
-            android:paddingTop="@dimen/activity_vertical_margin"
-            tools:context="com.noni.Orderise.ShortBlack">
-    <ImageView
-        android:id="@+id/coffee_cup_image"
-        android:layout_width="match_parent"
-        android:scaleType="fitXY"
-        android:layout_height="300dp"
-        android:src="@drawable/shortblack_order"/>
-    <ListView
-        android:id="@+id/order_list"
-        android:layout_below="@id/coffee_cup_image"
-        android:layout_height="wrap_content"
-        android:layout_width="match_parent"
-        android:paddingBottom="@dimen/orderSubmitButtonHeight">
-    </ListView>
-    <LinearLayout
-        android:layout_below="@+id/order_list"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_horizontal"
+                android:background="@color/app_background"
+                android:paddingLeft="@dimen/activity_horizontal_margin"
+                android:paddingRight="@dimen/activity_horizontal_margin"
+                android:paddingTop="@dimen/activity_vertical_margin"
+                tools:context="com.noni.Orderise.OrderDetails">
+
+    <RelativeLayout
+        android:id="@+id/order_details_buttons"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:background="@color/app_background"
         android:orientation="horizontal"
-        android:background="@android:drawable/screen_background_dark_transparent">
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp">
+
         <Button
-            android:layout_gravity="center_horizontal"
-            android:background="@color/secondary_color"
-            android:textColor="@color/all_text_color"
-            android:id="@+id/editButton"
-            android:textAllCaps="false"
+            android:id="@+id/button_edit_order"
             android:layout_width="@dimen/shortBlackButtonWidth"
             android:layout_height="@dimen/orderSubmitButtonHeight"
-            android:text="Edit Order?"/>
-        <Button
+            android:layout_alignParentLeft="true"
             android:layout_gravity="center_horizontal"
-            android:background="@color/secondary_color"
-            android:textColor="@color/all_text_color"
-            android:id="@+id/newOrderButton"
+            android:background="@color/button_active"
+            android:text="Edit Order?"
             android:textAllCaps="false"
+            android:textColor="@color/all_text_color"
+            android:visibility="visible"/>
+
+        <Button
+            android:id="@+id/button_delete_items"
             android:layout_width="@dimen/shortBlackButtonWidth"
             android:layout_height="@dimen/orderSubmitButtonHeight"
-            android:text="Discard and new order?"/>
-    </LinearLayout>
+            android:layout_alignParentLeft="true"
+            android:layout_gravity="center_horizontal"
+            android:background="@color/button_active"
+            android:text="Delete"
+            android:textAllCaps="false"
+            android:textColor="@color/all_text_color"
+            android:visibility="gone"/>
+
+        <Button
+            android:id="@+id/button_new_order"
+            android:layout_width="@dimen/shortBlackButtonWidth"
+            android:layout_height="@dimen/orderSubmitButtonHeight"
+            android:layout_alignParentRight="true"
+            android:layout_gravity="center_horizontal"
+            android:background="@color/button_active"
+            android:text="Discard and new order?"
+            android:textAllCaps="false"
+            android:textColor="@color/all_text_color"/>
+
+        <Button
+            android:id="@+id/button_add_more_items"
+            android:layout_width="@dimen/shortBlackButtonWidth"
+            android:layout_height="@dimen/orderSubmitButtonHeight"
+            android:layout_alignParentRight="true"
+            android:layout_gravity="center_horizontal"
+            android:background="@color/button_active"
+            android:text="Add to current Order?"
+            android:visibility="gone"
+            android:textAllCaps="false"
+            android:textColor="@color/all_text_color"/>
+
+    </RelativeLayout>
+
+        <ImageView
+            android:layout_below="@id/order_details_buttons"
+            android:id="@+id/coffee_cup_image"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scaleType="fitXY"
+            android:src="@drawable/shortblack_order"/>
+
+        <ListView
+            android:id="@+id/order_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/coffee_cup_image"
+            android:paddingBottom="10dp">
+        </ListView>
 </RelativeLayout>

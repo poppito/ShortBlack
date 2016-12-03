@@ -69,8 +69,7 @@ public class CoffeeOrder implements Serializable {
     public boolean allValuesValidated() {
         if ((milkChoice != null) && (coffeeType != null) && (coffeeStrength != null) && (additiveChoice != null) && (orderSize != null)) {
             return true;
-        }
-        else {
+        } else {
             return false;
         }
     }
@@ -85,8 +84,7 @@ public class CoffeeOrder implements Serializable {
     public String checkForOrderCompletion(Context c) {
         if (allValuesValidated()) {
             return c.getResources().getString(R.string.orderisGood);
-        }
-        else {
+        } else {
             if (milkChoice == null) {
                 return c.getResources().getString(R.string.milkMissing);
             } else if (additiveChoice == null) {
@@ -97,8 +95,7 @@ public class CoffeeOrder implements Serializable {
                 return c.getResources().getString(R.string.orderSizeMissing);
             } else if (coffeeStrength == null) {
                 return c.getResources().getString(R.string.coffeeStrengthMissing);
-            }
-            else {
+            } else {
                 return "";
             }
         }
@@ -110,5 +107,18 @@ public class CoffeeOrder implements Serializable {
 
     public String getOrderName() {
         return orderName;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o instanceof CoffeeOrder) {
+            if (((CoffeeOrder) o).displayOrder().equals(this.displayOrder())) {
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
+        return false;
     }
 }

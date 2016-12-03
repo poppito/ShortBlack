@@ -10,7 +10,7 @@
               android:orientation="vertical"
               tools:context="com.noni.Orderise.Orderise">
 
-    <LinearLayout
+    <RelativeLayout
         android:id="@+id/buttons"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -18,7 +18,9 @@
         android:gravity="center"
         android:orientation="horizontal"
         android:paddingTop="@dimen/linear_layout_spacers"
-        android:background="@android:color/white"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:background="@color/app_background"
         android:layout_alignParentTop="true">
 
         <Button
@@ -26,52 +28,53 @@
             style="@style/shortblack_buttons"
             android:layout_width="@dimen/shortBlackButtonWidth"
             android:layout_height="@dimen/orderSubmitButtonHeight"
-            android:layout_marginRight="20dp"
+            android:layout_alignParentLeft="true"
             android:text="@string/shortblack_add_another_order_string"/>
         <Button
+            android:layout_alignParentRight="true"
             android:id="@+id/submitButton"
             style="@style/shortblack_buttons"
             android:layout_width="@dimen/shortBlackButtonWidth"
             android:layout_height="@dimen/orderSubmitButtonHeight"
             android:drawableEnd="@drawable/ic_shortblack_submit"
-            android:paddingLeft="15dp"
-            android:paddingRight="10dp"
             android:text="@string/orderSubmitButton"/>
-    </LinearLayout>
+    </RelativeLayout>
 
     <ScrollView
+        android:layout_below="@id/buttons"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/buttons"
-        android:paddingLeft="@dimen/activity_horizontal_margin"
-        android:paddingRight="@dimen/activity_horizontal_margin"
         android:fadingEdge="vertical"
-        android:fadingEdgeLength="150dp">
+        android:fadingEdgeLength="50dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:focusableInTouchMode="true"
-            android:orientation="vertical"
-            android:paddingBottom="80dp">
+            android:orientation="vertical">
 
             <TextView
                 android:id="@+id/title_message"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/textHeight"
+                android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/linear_layout_spacers"
                 android:layout_marginTop="@dimen/linear_layout_spacers"
                 android:gravity="center"
                 android:text="@string/titleString"
                 android:textColor="@color/textColor"
-                android:textSize="@dimen/largeTextSize">
+                android:textSize="@dimen/largeTextSize"
+                android:paddingBottom="20dp">
             </TextView>
 
             <Spinner
                 android:id="@+id/orderSizesSpinner"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/textHeight"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
                 android:gravity="center_horizontal"
                 android:paddingBottom="@dimen/linear_layout_spacers">
             </Spinner>
@@ -79,6 +82,8 @@
             <Spinner
                 android:id="@+id/milkChoicesSpinner"
                 android:layout_width="match_parent"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
                 android:layout_height="@dimen/textHeight"
                 android:gravity="center_horizontal"
                 android:paddingBottom="@dimen/linear_layout_spacers">
@@ -88,6 +93,8 @@
                 android:id="@+id/coffeeStrength"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/textHeight"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
                 android:gravity="center_horizontal"
                 android:paddingBottom="@dimen/linear_layout_spacers">
             </Spinner>
@@ -96,6 +103,8 @@
                 android:id="@+id/additiveChoicesSpinner"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/textHeight"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
                 android:gravity="center_horizontal"
                 android:paddingBottom="@dimen/linear_layout_spacers">
             </Spinner>
@@ -104,6 +113,8 @@
                 android:id="@+id/coffeeTypeSpinner"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/textHeight"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
                 android:gravity="center_horizontal"
                 android:paddingBottom="@dimen/linear_layout_spacers">
             </Spinner>

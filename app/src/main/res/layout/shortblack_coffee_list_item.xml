@@ -2,25 +2,48 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:id="@+id/single_coffee_order_item"
               android:layout_width="match_parent"
-              android:layout_height="wrap_content"
+              android:layout_height="match_parent"
               android:orientation="vertical">
-    <TextView
-        android:id="@+id/coffee_order_item"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:text=""
-        android:textColor="@color/all_text_color"
-        android:textSize="@dimen/buttonTextSize">
-    </TextView>
 
-    <TextView
-        android:id="@+id/extras_order_item"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text=""
-        android:textColor="@color/all_text_color"
-        android:textSize="@dimen/buttonTextSize"
-        android:visibility="invisible">
-    </TextView>
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <CheckBox
+            android:id="@+id/coffee_order_item_checkbox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:layout_margin="5dp"
+            android:background="@color/button_active"
+            />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/coffee_order_item"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textColor="@color/all_text_color"
+                android:textSize="@dimen/buttonTextSize">
+            </TextView>
+
+            <TextView
+                android:id="@+id/extras_order_item"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textColor="@color/all_text_color"
+                android:textSize="@dimen/buttonTextSize"
+                android:visibility="gone">
+            </TextView>
+        </LinearLayout>
+    </LinearLayout>
 </LinearLayout>
