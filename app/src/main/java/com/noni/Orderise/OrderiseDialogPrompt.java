@@ -17,6 +17,9 @@ public class OrderiseDialogPrompt extends DialogFragment {
     private Context context;
     private ArrayListRefreshable<CoffeeOrder> orders;
 
+    public OrderiseDialogPrompt() {
+        super();
+    }
 
     public OrderiseDialogPrompt(String title, String message, String positiveButtonText, String negativeButtonText, Context context, ArrayListRefreshable<CoffeeOrder> orders) {
         super();
@@ -26,20 +29,6 @@ public class OrderiseDialogPrompt extends DialogFragment {
         this.negativeButtonText = negativeButtonText;
         this.context = context;
         this.orders = orders;
-    }
-
-
-    public OrderiseDialogPrompt(String title, String message, String positiveButtonText, String negativeButtonText, Context context ) {
-        super();
-        this.title = title;
-        this.message = message;
-        this.positiveButtonText = positiveButtonText;
-        this.negativeButtonText = negativeButtonText;
-        this.context = context;
-    }
-
-    public OrderiseDialogPrompt() {
-        super();
     }
 
     @Override
