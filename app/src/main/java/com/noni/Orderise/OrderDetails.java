@@ -27,7 +27,7 @@ public class OrderDetails extends AppCompatActivity implements View.OnClickListe
     private ListView coffeeOrderList;
     private CoffeeOrderAdapter coffeeOrderAdapter;
     private ArrayListRefreshable<CoffeeOrder> coffeeOrders;
-    public ArrayListRefreshListener mListener;
+    public ArrayListRefreshListener mListener, mListenerHere;
     private boolean showCheckBoxes = false;
     private Context context;
     public ArrayListRefreshable<CoffeeOrder> selectedList = new ArrayListRefreshable<CoffeeOrder>();
@@ -76,6 +76,26 @@ public class OrderDetails extends AppCompatActivity implements View.OnClickListe
             }
         };
         selectedList.setArrayListRefreshListener(mListener);
+        mListenerHere = new ArrayListRefreshListener() {
+            @Override
+            public void onRefresh() {
+               final Intent backToMainActivity = new Intent(getApplicationContext(), Orderise.class);
+                if (coffeeOrders.size() <= 0) {
+                    final Snackbar sb = Snackbar.make(findViewById(android.R.id.content), getResources().getString(R.string.nothingToSeeHere), Snackbar.LENGTH_LONG);
+                    sb.show();
+                    android.os.Handler handler = new android.os.Handler();
+                    handler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            deleteAllOrders();
+                            startActivity(backToMainActivity);
+                            finish();
+                        }
+                    }, 3000);
+                }
+            }
+        };
+        coffeeOrders.setArrayListRefreshListener(mListenerHere);
     }
 
     @Override
@@ -88,10 +108,7 @@ public class OrderDetails extends AppCompatActivity implements View.OnClickListe
                         getResources().getString(R.string.orderisePromptBeforeDeleteAll), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        SharedPreferences mPreferences = context.getSharedPreferences("savedPreferences", Context.MODE_PRIVATE);
-                        SharedPreferences.Editor editor = mPreferences.edit();
-                        editor.putInt("orderSize", 99999999);
-                        editor.apply();
+                        deleteAllOrders();
                         Intent backToMainActivity = new Intent(context, Orderise.class);
                         startActivity(backToMainActivity);
                         finish();
@@ -118,7 +135,7 @@ public class OrderDetails extends AppCompatActivity implements View.OnClickListe
                         OrderiseDialogFragment promptForDeleteSome = new OrderiseDialogFragment(context, getResources().getString(R.string.orderisePromptBeforeDeleteSome, selectedList.size()), new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                for (int i=0; i<selectedList.size(); i++) {
+                                for (int i = 0; i < selectedList.size(); i++) {
                                     CoffeeOrder order = (CoffeeOrder) selectedList.get(i);
                                     if (coffeeOrders.contains((order))) {
                                         coffeeOrders.remove(order);
@@ -133,8 +150,7 @@ public class OrderDetails extends AppCompatActivity implements View.OnClickListe
                             }
                         });
                         promptForDeleteSome.show(getFragmentManager(), "PromptForDeleteSome");
-                    }
-                    else {
+                    } else {
                         final Snackbar sb = Snackbar.make(findViewById(android.R.id.content), getResources().getString(R.string.nothingToDelete), Snackbar.LENGTH_LONG);
                         sb.show();
                         mDeleteButton.setVisibility(View.GONE);
@@ -163,12 +179,15 @@ public class OrderDetails extends AppCompatActivity implements View.OnClickListe
         selectedList.clear();
         coffeeOrderAdapter = new CoffeeOrderAdapter(context, coffeeOrders, showCheckBoxes, selectedList, mListener);
         coffeeOrderList.setAdapter(coffeeOrderAdapter);
+        mListenerHere.onRefresh();
     }
 
     private void writeOrdersToFile() {
         if (coffeeOrders.size() > 0) {
             FileOperations writeOrders = new FileOperations();
-            writeOrders.writeToFile(this,coffeeOrders, this.getApplicationContext().getSharedPreferences("savedPreferences", Context.MODE_PRIVATE));
+            writeOrders.writeToFile(this, coffeeOrders, this.getApplicationContext().getSharedPreferences("savedPreferences", Context.MODE_PRIVATE));
+        } else {
+
         }
     }
 
@@ -178,5 +197,12 @@ public class OrderDetails extends AppCompatActivity implements View.OnClickListe
             newList.add(order);
         }
         return newList;
+    }
+
+    private void deleteAllOrders() {
+        SharedPreferences mPreferences = context.getSharedPreferences("savedPreferences", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = mPreferences.edit();
+        editor.putInt("orderSize", 99999999);
+        editor.apply();
     }
 }
