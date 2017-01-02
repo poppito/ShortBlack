@@ -319,12 +319,12 @@ public class Orderise extends AppCompatActivity implements OnClickListener, Adap
     @Override
     public void afterTextChanged(Editable s) {
 
-        if (s.equals(nameText.getEditableText())) {
+        if (s.hashCode() == nameText.getText().hashCode()) {
             if (s.length() > 0) {
                 name = s.toString();
                 currentOrder.setOrderName(name);
             }
-        } else if (s.equals(special_orders.getEditableText())) {
+        } else if (s.hashCode() == special_orders.getText().hashCode()) {
             if (s.length() > 0) {
                 currentOrder.setSpecialOrder("Special instructions: " + s.toString());
             }
