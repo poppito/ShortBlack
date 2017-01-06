@@ -25,18 +25,24 @@
 
         <Button
             android:id="@+id/saveForLater"
-            style="@style/shortblack_buttons"
-            android:layout_width="@dimen/shortBlackButtonWidth"
-            android:layout_height="@dimen/orderSubmitButtonHeight"
+            android:theme="@style/AppTheme.Button"
+            android:textAllCaps="false"
+            android:textSize="@dimen/buttonTextSize"
+            android:gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:text="@string/shortblack_add_another_order_string"/>
         <Button
-            android:layout_alignParentRight="true"
+            android:layout_toEndOf="@id/saveForLater"
+            android:layout_marginLeft="10dp"
             android:id="@+id/submitButton"
-            style="@style/shortblack_buttons"
-            android:layout_width="@dimen/shortBlackButtonWidth"
-            android:layout_height="@dimen/orderSubmitButtonHeight"
-            android:drawableEnd="@drawable/ic_shortblack_submit"
+            android:theme="@style/AppTheme.Button"
+            android:textAllCaps="false"
+            android:textSize="@dimen/buttonTextSize"
+            android:gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:text="@string/orderSubmitButton"/>
     </RelativeLayout>
 

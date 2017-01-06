@@ -8,7 +8,7 @@
     <string name="saveForLaterButton">Save order for next time?</string>
     <string name="orString">Select order below</string>
     <string name="titleString">Please select order below.</string>
-    <string name="shortblack_add_another_order_string"> + Add another order?</string>
+    <string name="shortblack_add_another_order_string">Add another order?</string>
 
     <string-array name="genderChoicesArray">
         <item>Male</item>
@@ -27,12 +27,11 @@
 
     <string-array name="orderSizesArray">
         <item>Order size?</item>
-        <item>Short</item>
-        <item>Small</item>
-        <item>Medium</item>
-        <item>Large</item>
-        <item>Tall</item>
-        <item>Shot</item>
+        <item>short</item>
+        <item>small</item>
+        <item>medium</item>
+        <item>large</item>
+        <item>all</item>
     </string-array>
 
     <string-array name="additiveArray">
@@ -54,14 +53,14 @@
     </string-array>
     <string-array name="cofeeTypeArray">
         <item>Coffee type?</item>
-        <item>Espresso</item>
-        <item>Latte</item>
-        <item>Capuccino</item>
-        <item>Mocha</item>
-        <item>Mochaccino</item>
-        <item>Flat White</item>
-        <item>Chai Latte</item>
-        <item>Hot Chocolate</item>
+        <item>espresso</item>
+        <item>latte</item>
+        <item>capuccino</item>
+        <item>mocha</item>
+        <item>mochaccino</item>
+        <item>flat white</item>
+        <item>chai latte</item>
+        <item>hot chocolate</item>
 
     </string-array>
     <string name="title_activity_order_details">Order_details</string>
@@ -74,7 +73,7 @@
     <string name = "orderSizeMissing">Please select an order size!</string>
     <string name = "coffeeTypeMissing">Is it a latte or an espresso?</string>
     <string name = "coffeeStrengthMissing">Please select coffee strength!</string>
-    <string name = "orderisGood">Order looks A-OK!</string>
+    <string name = "orderisGood">Order is ready for submission! :)</string>
 
     <string name= "orderisePromptTitle">Orderise</string>
     <string name= "orderisePromptMessage">Previously saved orders found. Would you like to load them instead?</string>

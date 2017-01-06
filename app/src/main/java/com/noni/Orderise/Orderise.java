@@ -127,7 +127,7 @@ public class Orderise extends AppCompatActivity implements OnClickListener, Adap
         //Initialise submit button
         submitButton.setOnClickListener(this);
         saveButton.setOnClickListener(this);
-        submitButton.setBackgroundColor(getResources().getColor(R.color.button_inactive));
+        //submitButton.setBackgroundColor(getResources().getColor(R.color.button_inactive));
         nameText.addTextChangedListener(this);
         special_orders.addTextChangedListener(this);
         nameText.setOnClickListener(this);
@@ -187,8 +187,8 @@ public class Orderise extends AppCompatActivity implements OnClickListener, Adap
                 break;
             }
         }
-        enableSaveButton();
-        enableSubmitButton();
+        //enableSaveButton();
+        //enableSubmitButton();
         statusText.setText(currentOrder.checkForOrderCompletion(this.getApplicationContext()));
     }
 

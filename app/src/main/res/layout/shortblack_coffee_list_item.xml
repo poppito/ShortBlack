@@ -31,7 +31,7 @@
                 android:layout_height="wrap_content"
                 android:text=""
                 android:textColor="@color/all_text_color"
-                android:textSize="@dimen/buttonTextSize">
+                android:textSize="@dimen/listTextView">
             </TextView>
 
             <TextView
@@ -40,7 +40,7 @@
                 android:layout_height="wrap_content"
                 android:text=""
                 android:textColor="@color/all_text_color"
-                android:textSize="@dimen/buttonTextSize"
+                android:textSize="@dimen/listTextView"
                 android:visibility="gone">
             </TextView>
         </LinearLayout>
