@@ -1,57 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:app="http://schemas.android.com/apk/res-auto"
-              xmlns:tools="http://schemas.android.com/tools"
-              android:id="@+id/shortblack_scrollview_main"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:layout_gravity="center_horizontal"
-              android:background="@color/app_background"
-              android:orientation="vertical"
-              tools:context="com.noni.Orderise.Orderise">
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:id="@+id/shortblack_scrollview_main"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_horizontal"
+                android:background="@color/app_background"
+                android:orientation="vertical"
+                tools:context="com.noni.Orderise.Orderise">
 
     <RelativeLayout
         android:id="@+id/buttons"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingBottom="10dp"
+        android:layout_alignParentTop="true"
+        android:background="@color/app_background"
         android:gravity="center"
         android:orientation="horizontal"
-        android:paddingTop="@dimen/linear_layout_spacers"
+        android:paddingBottom="10dp"
         android:paddingLeft="20dp"
         android:paddingRight="20dp"
-        android:background="@color/app_background"
-        android:layout_alignParentTop="true">
+        android:paddingTop="@dimen/linear_layout_spacers">
 
-        <Button
-            android:id="@+id/saveForLater"
-            android:theme="@style/AppTheme.Button"
-            android:textAllCaps="false"
-            android:textSize="@dimen/buttonTextSize"
-            android:gravity="center"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:text="@string/shortblack_add_another_order_string"/>
-        <Button
-            android:layout_toEndOf="@id/saveForLater"
-            android:layout_marginLeft="10dp"
-            android:id="@+id/submitButton"
-            android:theme="@style/AppTheme.Button"
-            android:textAllCaps="false"
-            android:textSize="@dimen/buttonTextSize"
-            android:gravity="center"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/orderSubmitButton"/>
+            android:orientation="horizontal"
+            android:gravity="center">
+
+            <Button
+                android:layout_weight="0.5"
+                android:id="@+id/saveForLater"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/shortblack_add_another_order_string"
+                android:textAllCaps="false"
+                android:textSize="@dimen/buttonTextSize"
+                android:theme="@style/AppTheme.Button"/>
+
+            <Button
+                android:layout_weight="0.5"
+                android:id="@+id/submitButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/orderSubmitButton"
+                android:textAllCaps="false"
+                android:textSize="@dimen/buttonTextSize"
+                android:theme="@style/AppTheme.Button"/>
+        </LinearLayout>
     </RelativeLayout>
 
     <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_below="@id/buttons"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:fadingEdge="vertical"
         android:fadingEdgeLength="50dp">
 
@@ -69,10 +76,10 @@
                 android:layout_marginBottom="@dimen/linear_layout_spacers"
                 android:layout_marginTop="@dimen/linear_layout_spacers"
                 android:gravity="center"
+                android:paddingBottom="20dp"
                 android:text="@string/titleString"
                 android:textColor="@color/textColor"
-                android:textSize="@dimen/largeTextSize"
-                android:paddingBottom="20dp">
+                android:textSize="@dimen/largeTextSize">
             </TextView>
 
             <Spinner
@@ -88,9 +95,9 @@
             <Spinner
                 android:id="@+id/milkChoicesSpinner"
                 android:layout_width="match_parent"
+                android:layout_height="@dimen/textHeight"
                 android:layout_marginLeft="30dp"
                 android:layout_marginRight="30dp"
-                android:layout_height="@dimen/textHeight"
                 android:gravity="center_horizontal"
                 android:paddingBottom="@dimen/linear_layout_spacers">
             </Spinner>

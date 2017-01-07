@@ -20,50 +20,56 @@
         android:paddingLeft="20dp"
         android:paddingRight="20dp">
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center">
+
         <Button
+            android:layout_weight="0.5"
             android:theme="@style/AppTheme.Button"
             android:id="@+id/button_edit_order"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
             android:layout_gravity="center_horizontal"
             android:text="Edit Order?"
             android:textAllCaps="false"
             android:visibility="visible"/>
 
         <Button
+            android:layout_weight="0.5"
             android:theme="@style/AppTheme.Button"
             android:id="@+id/button_delete_items"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
             android:layout_gravity="center_horizontal"
             android:text="Delete"
             android:textAllCaps="false"
             android:visibility="gone"/>
 
         <Button
+            android:layout_weight="0.5"
             android:id="@+id/button_new_order"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
             android:layout_gravity="center_horizontal"
             android:text="Discard and new order?"
             android:textAllCaps="false"
             android:theme="@style/AppTheme.Button"/>
 
         <Button
+            android:layout_weight="0.5"
             android:theme="@style/AppTheme.Button"
             android:id="@+id/button_add_more_items"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
             android:layout_gravity="center_horizontal"
             android:text="Add to current Order?"
             android:visibility="gone"
             android:textAllCaps="false"
             android:textColor="@color/all_text_color"/>
-
+        </LinearLayout>
     </RelativeLayout>
 
         <ImageView
